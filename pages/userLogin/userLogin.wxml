@@ -1,0 +1,31 @@
+<view class="container">
+    <text class="login-title">登录注册更精彩</text>
+    <form style="width: 100%;margin-top: 52px;" bindsubmit="formSubmit">
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd" style="width: 88px">
+                    <picker bindchange="bindCountryCodeChange" value="{{countryCodeIndex}}" range="{{countryCodes}}">
+                        <view class="weui-select">{{countryCodes[countryCodeIndex]}}</view>
+                    </picker>
+                </view>
+                <view class="weui-cell__bd weui-cell__bd_in-select-before">
+                    <input class="weui-input" name="phone" type="number" value="{{userMobile}}" placeholder="请输入手机号" />
+                </view>
+            </view>
+        </view>
+        <view class="row">
+            <button type="primary" form-type="submit">获取验证码登录</button>
+        </view>
+         
+        <view class="row2">
+            <button type="primary" bindtap="toLoginByAccount">账号密码登录</button>
+        </view>
+        
+    </form>
+
+    <view class="login-title-detail section_text">
+        <text>登录注册即表示同意</text>
+        <text class="agreement">用户协议、</text>
+        <text class="clause">隐私条款</text>
+    </view>
+</view>

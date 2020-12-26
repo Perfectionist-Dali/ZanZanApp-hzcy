@@ -1,0 +1,124 @@
+/* miniprogram/pages/index/index.wxss */
+page {
+  /* background: #f6f6f6; */
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.goto-contact {
+  color: #66ccff
+}
+
+.inputs {
+  background: #fff;
+  margin: 1px;
+}
+.welcome-image{
+  width:100%;
+  height:500rpx
+}
+button{
+  background-color: #42c02e;
+  color:#fff;
+  content: "\E604";
+}
+
+.btn1 {
+  width: 80%;
+  height: 50px;
+  margin-top: 20rpx;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 98rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.bgc{
+  background-color: #45B035;
+}
+.bgc-no{
+  background-color: #D8D8D8;
+}
+
+.logo-style{
+  margin-top:160rpx;
+}
+
+.btn2 {
+  width: 80%;
+  margin-top: 20rpx;
+  background-color: #ffff;
+  color: rgb(0, 0, 0);
+  border-radius: 98rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d13d4b;
+}
+
+.btnImg1 {
+  width: 77rpx;
+  height: 77rpx;
+}
+.btnImg2 {
+  margin-left: 12rpx;
+  margin-bottom: 2px;
+  width: 50rpx;
+  height: 50rpx;
+}
+.btn1::after {
+  border-radius: 98rpx;
+  border: 0; 
+}
+
+.businessLogin{
+  font-size: 16px;
+  color: #d13d4b;
+  float: left;
+  margin-left:90rpx;
+}
+.zanzan-logo{
+  font-size: 85rpx;
+  text-align: center;
+  color: #d13d4b;
+  font-weight: bold;
+}
+.slogan{
+  font-size: 35rpx;
+  text-align: center;
+  color: #848484;
+  margin-top: 20px;
+}
+.login-title-detail{
+  float: left;
+  font-size: 15px;
+  width:100%;
+  line-height: 50px;
+}
+.section_text {
+  width: 80%;
+  margin-top: 20px;
+  margin-left: 20px;
+  text-align: center;
+  font-size: 32rpx;
+  bottom: 50rpx;
+  left: 0;
+  right: 0;
+}
+.agreement{
+  margin-left: 6px;
+  color: #d13d4b;
+}
+.clause{
+  margin-left: 6px;
+  color: #d13d4b;
+}
+.slogan-text{
+  width: 170px;
+  height: 32px;
+}

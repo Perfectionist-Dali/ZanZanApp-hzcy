@@ -1,0 +1,84 @@
+<scroll-view scroll-y 
+  scroll-into-view="{{toView}}"
+  style="height:100vh"
+  scroll-with-animation="true"
+  bindscrolltolower="loadMoreReply">
+
+  <view style="width:100%;display: inline-block;text-align:center;">
+    <view class="agreeuser-view">
+      <view class="discuss-text" wx:if="{{letterNotReadNums > 0}}">
+        <text class="no-read-letters">{{letterNotReadNums}}</text>
+        <text class="letters">个私信消息未读</text>
+      </view>
+      <view class="discuss-text" wx:if="{{letterNotReadNums == 0}}">全部已读</view>
+    </view>
+
+    <view style="margin-top:55px;">
+      <block wx:for-items="{{letterInitiatList}}" wx:key="id">
+        <view class="agree-user">
+          <view class="comments_details" bindtap="onTalkLetter" data-talkuserid="{{item.talkUserId}}" data-initiatid="{{item.id}}" data-headimageurl="{{item.headImageUrl}}" data-nickname="{{item.nickName}}">
+            <view class="comments_userPic">
+              <image class="comments_user_headpic" src="{{item.headImageUrl}}"></image>
+              <block wx:if="{{item.notReadNums > 0}}">
+                <view class="weui-badge my_notice_msg" wx:if="{{item.notReadNums < 99}}">{{item.notReadNums}}</view>
+                <view class="weui-badge my_notice_msg" wx:if="{{item.notReadNums >= 99}}">99+</view>
+              </block>
+            </view>
+            <view class="comments_detail">
+              <view class="user_name">{{item.nickName}}</view>
+              <view class="last-word">
+                {{item.lastTalkContent}}
+              </view>
+            </view>
+            <view class="letter-time">
+              <text class="letter-time-text">{{item.lastTalkTime}}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+
+<!--       
+      <view class="agree-user">
+        <view class="comments_details" bindtap="onTalkLetter" data-userid="c3bfa9ae9d804a81bf5e9216429c4240">
+          <view class="comments_userPic">
+            <image class="comments_user_headpic" src="http://172.20.10.2:8080/images/header/default_headpic4.png"></image>
+          </view>
+          <view class="comments_detail">
+            <view class="user_name">手机用户3828</view>
+            <view class="last-word">
+              你好哇
+            </view>
+          </view>
+          <view class="letter-time">
+            <text class="letter-time-text">52分钟前</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="agree-user">
+        <view class="comments_details" bindtap="onTalkLetter" data-userid="c3bfa9ae9d804a81bf5e9216429c4240">
+          <view class="comments_userPic">
+            <image class="comments_user_headpic" src="http://172.20.10.2:8080/portrait/20200906/8a8c88093ead48e8aef6650bb4ba1e0a.png"></image>
+          </view>
+          <view class="comments_detail">
+            <view class="user_name">手机用户8000</view>
+            <view class="last-word">
+              亲爱的北境之王
+            </view>
+          </view>
+          <view class="letter-time">
+            <text class="letter-time-text">52分钟前</text>
+          </view>
+        </view>
+      </view> -->
+
+
+      <view style="width:100%;height:80px;">
+        <view class="weui-loadmore" wx:if="{{loadingmore}}">
+          <view class="weui-loading"></view>
+          <view class="weui-loadmore__tips">正在加载</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

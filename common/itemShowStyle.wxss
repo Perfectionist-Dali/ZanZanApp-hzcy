@@ -1,0 +1,136 @@
+.itemContainer {
+  background-color: transparent;
+}
+
+.child {
+  /*display: inline-block;*/
+  width: 46%;
+  margin: 2%;
+  display: inline-block;
+  vertical-align: top;
+  background-color: RGB(242, 242, 242);
+}
+
+.child view {
+  display: flex;
+  flex-direction: column;
+  margin: 10rpx
+}
+
+.child view.money{
+  display: block;
+  margin-left: 0;
+}
+
+.child-img {
+  height: 400rpx;
+  width:100%;
+}
+
+.moneyIcon {
+  font-size: 30rpx;
+}
+
+.itemTitle {
+  font-size: 32rpx;
+  margin-top: 10rpx;
+}
+
+.money .salesMoney {
+  display: inline-block;
+  text-decoration:line-through;
+  font-size: 30rpx;
+}
+
+.noInfoView {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+}
+
+.noInfoIcon {
+  width: 150rpx;
+  height: 150rpx;
+}
+
+.noInfoWarn {
+  margin-top: 10rpx;
+  font-size: 25rpx;
+}
+
+
+.dynamicItem {
+  margin-top: 22px;
+  display: inline-block;
+  width: 100%;
+  border-bottom: 1px #F0F0F0 solid;
+}
+
+.dynamicItemFlex {
+  display: flex;
+  height: 100%;
+}
+
+.dynamicItem-left {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  align-items: center;
+}
+
+.couponPriceIcon {
+  font-size: 25rpx;
+}
+
+.couponPriceNum {
+  font-weight: border;
+  font-size: 70rpx;
+}
+
+.couponCondition {
+  font-size: 25rpx;
+}
+
+.dynamicItem-middle {
+  width: 76%;
+  display: flex;
+  flex-direction: column;
+}
+
+.dynamicTitle {
+  float: left;
+  width: 60%;
+  font-size: 17px;
+  font-weight: bold;
+}
+.close_mes{
+  width: 20%;
+  float: right;
+  height: 25px;
+}
+.dynamicTimeStamp {
+  margin-top: 0px;
+}
+
+.dynamicTimeStamp text{
+  font-size: 17px;
+  line-height:1.5em;
+}
+
+.dynamicItem-right {
+  display: flex;
+  width: 80rpx;
+  align-items: center;
+  justify-content: center;
+}
+
+.dynamicItem-right text {
+  width: 35rpx;
+  font-size: 35rpx;
+}
+
+.couponContainer scroll-view {
+  height: 100%;
+}

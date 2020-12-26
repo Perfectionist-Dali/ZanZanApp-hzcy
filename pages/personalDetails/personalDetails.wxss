@@ -1,0 +1,92 @@
+.myself-info{
+  width:100%;
+  display: inline-block;
+  text-align: center;
+}
+.edit-myself-view{
+  margin-top:30px;
+  width:100%;
+  display: inline-block;
+}
+.edit-myself-btn{
+  width:85%;
+  text-align:right;
+  display: inline-block;
+  margin-bottom: 35px;
+}
+.myself-info-view{
+  width:85%;
+  height: 50px;
+  display:inline-block;
+}
+.myself-info-label{
+  float:left;
+  width:30%;
+  text-align:left;
+  font-size:16px;
+  color:#3C3C3C;
+  font-weight: bold;
+  line-height: 50px;
+}
+.header-pic-view{
+  height:60px;
+}
+.header-pic-text{
+  height:60px;
+  line-height: 60px;
+}
+.myself-info-text{
+  float:left;
+  width:68%;
+  text-align:right;
+  line-height: 50px;
+  color:#6C6C6C;
+}
+.view-width{
+  width:64%;
+}
+.line{
+  width: 100%;
+  height: 0rpx;
+  background-color:#BEBEBE;
+}
+.line-text{
+  width: 100%;
+  height: 3rpx;
+  background-color:#F0F0F0;
+}
+.avatar{
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: #e5e5e5;
+  border-radius: 50%;
+  float: right;
+}
+.choose-image{
+  width: 75px;
+  line-height: 56px;
+  float: right;
+  color:#d13d4b;
+  margin-left: 10px;
+}
+.male-text{
+  width:10px;
+}
+.myself_write{
+  margin-top:16px;
+  width: 15px;
+  height: 15px;
+}
+.input-right{
+  margin-right: 18px;
+}
+.view-right{
+  margin-right: 0px;
+}
+.signature-content{
+  line-height: 25px;
+  margin-top: 13px;
+}
+.choose-text{
+  color:#969799;
+}

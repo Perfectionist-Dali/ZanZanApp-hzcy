@@ -1,0 +1,45 @@
+<!--miniprogram/pages/index/index.wxml-->
+<view class="container">
+  <view class="logo-style">
+    <view class="zanzan-logo">赞赞</view>
+    <view class="slogan">
+      <!-- <text>爱生活</text><text style="margin-left:10px;">多点赞</text> -->
+      <image class='slogan-text' src='{{imageHost}}/images/icons/slogan21.png'></image>
+    
+    </view>
+  </view>
+
+
+  <!-- <button style="margin-top:160rpx;" class="btn1" open-type="getUserInfo" bindgetuserinfo="bindLogin">
+    <image class='btnImg1' src='{{imageHost}}/images/icons/Wechat_64px.png'></image>
+    <text>微信授权登录</text>
+  </button> -->
+  <button style="margin-top:160rpx;" class="btn1 {{agreeTermsAgreement ? 'bgc' : 'bgc-no'}}" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumberLogin" disabled="{{!agreeTermsAgreement}}">
+    <block wx:if="{{agreeTermsAgreement}}">
+      <image class='btnImg1' src='{{imageHost}}/images/icons/Wechat_64px.png'></image>
+    </block>
+    <text>微信授权登录</text>
+  </button>
+  <view class="login-title-detail section_text">
+    <van-checkbox value="{{ agreeTermsAgreement }}" label-disabled icon-size="21px" checked-color="#d13d4b" bind:change="onChangeTermsAgreement">
+      <text>已阅读并同意</text>
+      <text class="agreement" bindtap="readUserAgreement">用户协议、</text>
+      <text class="clause" bindtap="readUserPrivacyClause">隐私条款</text>
+    </van-checkbox>
+  </view>
+<!-- 
+  <button style="margin-top:160rpx;" class="btn1" open-type="getUserInfo" bindgetuserinfo="bindLogin">
+    <image class='btnImg1' src='{{imageHost}}/images/icons/Wechat_64px.png'></image>
+    <text>微信登录</text>
+  </button>
+  <button style="margin-top:50rpx;" class="btn2" bindtap="toAccountLogin">
+    <image class='btnImg2' src='{{imageHost}}/images/icons/heart_64px.png'></image>
+    <text style="margin-left:10px;">手机号登录/注册</text>
+  </button>
+  
+  -->
+
+  <!-- <view style="width:100%;margin-top:30rpx;" bindtap="toBusinessLogin">
+    <text class="businessLogin">合作商登录</text>
+  </view> -->
+</view>

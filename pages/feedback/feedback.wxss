@@ -1,0 +1,124 @@
+@import '../../style/weui.wxss';
+
+.notification-alert{
+  position:fixed;
+  width:100%;
+  height:50px;
+  background: #fff;
+  z-index: 999;
+  opacity: 0.98;
+  background:	#F2F2F2;
+}
+.notice-text{
+  float: left;
+  margin-top:10px;
+  width:60%;
+  line-height: 30px;
+  border-radius: 20px;
+  color:#2E2E2E;
+  font-size:34rpx;
+  margin-left: 16px;
+}
+.release-mes-btn{
+  float: right;
+  text-align: center;
+  width:56px;
+  height:30px;
+  color:#d13d4b;
+  border:1px solid #d13d4b;
+  border-radius: 4px;
+  line-height: 30px;
+}
+.feedback-submit{
+  float: right;
+  margin-top:10px;
+  width:30%;
+  font-size:14px;
+  font-weight: bold;
+  margin-right: 16px;
+}
+.feedback-reason-list{
+  margin-top: 70px;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+.feedback-reason{
+  display: inline-block;
+  width:90%;
+  height:50px;
+  border: 1px solid #E6E6E6;
+}
+.feedback-remark{
+  display: inline-block;
+  width:90%;
+  height:50px;
+  line-height: 50px;
+  color:#1C1C1C;
+  text-align: left;
+}
+.feedback-remark >text{
+  margin-left:5px;
+}
+.feedback-remark-content{
+  display: inline-block;
+  width:90%;
+  text-align: left;
+}
+.text-area-footer > text{
+  color:#E6E6E6;
+}
+.text-area-wrapper {
+  float: left;
+  border: 1px solid #E6E6E6;
+  padding: 30rpx 20rpx;
+  width: 62%;
+  font-size: 32rpx;
+  height: 200rpx;
+  position: relative;
+}
+.feedback-images{
+  float: right;
+  padding: 30rpx 20rpx;
+  width: 24%;
+  height: 200rpx;
+  position: relative;
+}
+textarea {
+  width: 100%;
+  height: 100%;
+}
+.text-area-footer {
+  font-size: 27rpx;
+  color: #aaa;
+  text-align: end;
+  padding-right: 20rpx;
+  margin-top: -8px;
+}
+.feedback-reason-word{
+  float: left;
+  text-align: left;
+  width:72%;
+  height: 50px;
+  line-height: 50px;
+}
+.feedback-reason-radio{
+  float: right;
+  text-align: right;
+  width:12%;
+  color:#585858;
+  margin-top: 15px;
+}
+.feedback-reason-word >text{
+  margin-left:12px;
+  font-size: 16px;
+}
+.warming-word{
+  display: inline-block;
+  width:90%;
+  color: #A4A4A4;
+  height: 100px;
+  text-align: left;
+  margin-top: 14px;
+  font-size: 14px;
+}

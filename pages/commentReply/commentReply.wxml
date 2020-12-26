@@ -1,0 +1,61 @@
+<scroll-view scroll-y 
+  scroll-into-view="{{toView}}"
+  style="height:100vh"
+  scroll-with-animation="true"
+  bindscrolltolower="loadMoreReply"
+  >
+
+  <view class="comment-reply-view">
+    <view class="discuss-text">评论</view>
+    <view class="comments_details-top">
+      <view class="comments_userPic">
+        <image class="comments_user_headpic" style="width:42px;height:42px;border-radius: 21px;" src="{{commentInfo.userHeaderImage}}"></image>
+      </view>
+      <view class="comments_detail-top">
+        <view class="user_name">{{commentInfo.userNickname}}</view>
+        <view class="discuss">{{commentInfo.content}}</view>
+        <view class="discuss_footer_time">
+          <text>{{commentInfo.commentTimeFormat}}</text>
+          <view class="favor" data-commentindex="{{commentIndex}}" data-clickagree="{{clickAgree}}" data-commentuserid="{{commentInfo.userId}}" data-commentid="{{commentInfo.id}}" bindtap="onAgreeComment">
+            <image class="favor_discuss" src="{{imageHost}}/images/icons/{{clickAgree==true || clickAgree=='true'?'zan.png':'zan_un.png'}}"></image>
+            <view class="favor_discuss_nums">{{agreeNum}}</view>
+            <!-- <view class="complaint_discuss">...</view> -->
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="comment-reply-list">
+    <view class="comments_details reply-title-top">
+      <view class="reply-title">共{{replyNum}}条回复</view>
+    </view>
+    <block wx:for-items="{{replyList}}" wx:key="id">
+      <view class="comments_details">
+        <view class="comments_detail">
+          <view style="margin: 10px;">
+            <view class="user_name">
+            <image class="comments_user_headpic" src="{{item.userHeaderImage}}"></image>
+            <text class="user-nickname">{{item.userNickname}}</text>
+            </view>
+            <view class="reply-content">{{item.content}}</view>
+            <view class="discuss_footer reply-boot-content">
+              <text>{{item.commentTimeFormat}}</text>
+              <!-- <view class="favor">
+                <image class="favor_discuss" src="{{imageHost}}/images/icons/Thumb_up_69.png"></image>
+                <view class="favor_discuss_nums">{{item.agreeNum}}</view>
+                <view class="complaint_discuss">...</view>
+              </view> -->
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view style="width:100%;height:80px;">
+      <view class="weui-loadmore" wx:if="{{loadingmore}}">
+        <view class="weui-loading"></view>
+        <view class="weui-loadmore__tips">正在加载</view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

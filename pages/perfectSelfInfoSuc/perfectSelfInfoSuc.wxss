@@ -1,0 +1,25 @@
+.logo-style{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 85%;
+  position: absolute; 
+}
+.slogan{
+  font-size: 37rpx;
+  text-align: center;
+  color: #04B45F;
+}
+.go-zanzan{
+  width:80%;
+  height:35px;
+  line-height:35px;
+  border:1px solid #fdaab2;
+  border-radius: 5px;
+  color:#d13d4b;
+  font-size: 15px;
+  text-align: center;
+  margin-top: 20px;
+}

@@ -1,0 +1,89 @@
+<view class="page">
+	<view class="navbar">
+		<view style='text-align:left;' class="item un-release" bindtap="toCancelReleaseMes">
+      <view class="un-release-btn">取消</view>
+    </view>
+    <view style='text-align:right;' class="item release-mes" bindtap="releaseDynamicDetails" disabled='{{clickable}}'>
+      <view class="release-mes-btn">发布</view>
+    </view>
+	</view>
+
+<view class="app-poster-container">
+  <view class="body">
+    <view class="text-area-wrapper">
+      <textarea bindinput="bindTextInput" value="{{content}}" maxlength="300" auto-focus="true" placeholder-class="write-message" placeholder="写点什么.."/>
+      <view class="text-area-footer">
+        <text>{{remainLen}}/300</text>
+      </view>
+    </view>
+    <view class="page__bd">
+        <view class="weui-cells">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <view class="weui-uploader">
+                        <view class="weui-uploader__hd">
+                          <view class="weui-uploader__overview">
+                              <view class="weui-uploader__title" style="color:#3C3C3C;">选择图片</view>
+                              <view class="weui-uploader__info">{{files.length}}/9</view>
+                          </view>
+                        </view>
+                        <view class="weui-uploader__bd">
+                            <view class="weui-uploader__files" id="uploaderFiles">
+                                <block wx:for="{{files}}" wx:key="*this">
+                                    <view style="width: 208rpx;height:220rpx;float:left;">
+                                      <view class="weui-uploader__file" style="margin-right: 6px;margin-bottom: 6px;">
+                                        <image class="weui-uploader__img" style="float: left;width:180rpx;height:180rpx;" bindtap="previewImage" id="{{item}}" src="{{item}}" mode="aspectFill" />
+                                      
+                                        <view class="delete">
+                                          <image bindtap="deleteImg" data-index="{{index}}"  src="{{imageHost}}/images/icons/remove.png" class="deleteimg"></image>
+                                        </view>
+                                      </view>
+                                    </view>
+                                </block>
+                            </view>
+                            <view class="weui-uploader__input-box" style="margin-top:15px;">
+                                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="more-link">
+      <!-- <view class="link-btn">
+        <image style="width:22px;height: 22px;right: 1px;" class='link-icon1' src='{{imageHost}}/images/icons/point1.png'></image>
+        <text>标注位置</text>
+        <image class="point-to" src="{{imageHost}}/images/icons/Arrow_19.png"/>
+      </view> -->
+      <!-- <view class="link-btn">
+        <image style="width:22px;height:22px;" class='link-icon1' src='{{imageHost}}/images/icons/browser_72px.png'></image>
+        <text>跳转页面</text>
+        <image class="point-to" src="{{imageHost}}/images/icons/Arrow_19.png"/>
+      </view> -->
+      <!-- <view class="link-btn">
+        <image class='link-icon1' style="width:22px;height:22px;" src='{{imageHost}}/images/icons/user_96px.png'></image>
+        <text>谁可以看</text>
+        <image class="point-to" src="{{imageHost}}/images/icons/Arrow_19.png"/>
+      </view> -->
+      <!-- <view class="link-btn">
+        <image class='link-icon1' src='{{imageHost}}/images/icons/user_96px.png'></image>
+        <view class="choose_dynamic_view">
+          <view class="choose_dynamic">
+            <picker bindchange="bindPickerDynamicTypeChange" value="{{visiblePersonTypeIndex}}" range="{{visiblePersonTypeList}}">
+              <view class="picker">
+                <text class="DynamicType_label">谁可以看</text>
+                <text class="DynamicType">{{visiblePersonTypeList[visiblePersonTypeIndex]}}</text>
+                <view class="show_more">
+                  <image class="DynamicType_more" src="{{imageHost}}/images/icons/show_more1.png"></image>
+                </view>
+              </view>
+            </picker>
+          </view>
+        </view>
+      </view> -->
+    </view>
+  </view>
+</view>
+</view>

@@ -1,0 +1,119 @@
+<scroll-view scroll-y 
+  scroll-into-view="{{toView}}"
+  style="height:100vh"
+  scroll-with-animation="true">
+
+    <view>
+      <view class="notification-alert">
+        <view class="notice-text" bindtap="showMyMessageInfo" data-userid="{{userId}}">
+          选择反馈/举报原因
+        </view>
+        <view class="feedback-submit" bindtap="onSaveFeedback">
+          <view class="release-mes-btn">提交</view>
+        </view>
+      </view>
+
+      <view class="feedback-reason-list">
+        <van-radio-group value="{{feedbackReason}}" bind:change="onChooseFeedbackChange">
+          <view class="feedback-reason">
+            <view class="feedback-reason-word"><text>涉嫌欺诈</text></view>
+            <view class="feedback-reason-radio">
+              <view class="reason-radio">
+                <van-radio name="1" checked-color="#d13d4b"></van-radio>
+              </view>
+            </view>
+          </view>
+          <view class="feedback-reason">
+            <view class="feedback-reason-word"><text>淫秽色情</text></view>
+            <view class="feedback-reason-radio">
+              <view class="reason-radio">
+                <van-radio name="2" checked-color="#d13d4b"></van-radio>
+              </view>
+            </view>
+          </view>
+          <view class="feedback-reason">
+            <view class="feedback-reason-word"><text>封建迷信</text></view>
+            <view class="feedback-reason-radio">
+              <view class="reason-radio">
+                <van-radio name="3" checked-color="#d13d4b"></van-radio>
+              </view>
+            </view>
+          </view>
+          <view class="feedback-reason">
+            <view class="feedback-reason-word"><text>恶意营销</text></view>
+            <view class="feedback-reason-radio">
+              <view class="reason-radio">
+                <van-radio name="4" checked-color="#d13d4b"></van-radio>
+              </view>
+            </view>
+          </view>
+          <view class="feedback-reason">
+            <view class="feedback-reason-word"><text>政治有害</text></view>
+            <view class="feedback-reason-radio">
+              <view class="reason-radio">
+                <van-radio name="5" checked-color="#d13d4b"></van-radio>
+              </view>
+            </view>
+          </view>
+          <view class="feedback-reason">
+            <view class="feedback-reason-word"><text>图片/文章侵权</text></view>
+            <view class="feedback-reason-radio">
+              <view class="reason-radio">
+                <van-radio name="6" checked-color="#d13d4b"></van-radio>
+              </view>
+            </view>
+          </view>
+          
+          <view class="feedback-reason">
+            <view class="feedback-reason-word"><text>历史虚无主义</text></view>
+            <view class="feedback-reason-radio">
+              <view class="reason-radio">
+                <van-radio name="7" checked-color="#d13d4b"></van-radio>
+              </view>
+            </view>
+          </view>
+
+          <view class="feedback-reason">
+            <view class="feedback-reason-word"><text>其他（辱骂、恶意灌水等）</text></view>
+            <view class="feedback-reason-radio">
+              <view class="reason-radio">
+                <van-radio name="8" checked-color="#d13d4b"></van-radio>
+              </view>
+            </view>
+          </view>
+
+          <view class="feedback-remark">
+            <text>举证补充说明</text>
+          </view>
+
+      
+          <view class="feedback-remark-content">
+            <view class="text-area-wrapper">
+              <textarea bindinput="bindTextInput" value="{{reasonRemarks}}" maxlength="200"  placeholder-class="write-message" placeholder="输入文字或上传截图证明"/>
+              <view class="text-area-footer">
+                <text>{{remainLen}}/200</text>
+              </view>
+            </view>
+            <view class="feedback-images">
+              <van-uploader
+                file-list="{{ fileList }}"
+                deletable="{{ true }}"
+                accept="image"
+                preview-image="{{ true }}"
+                preview-size="70px"
+                fit="contain"
+                max-count="1"
+                bind:after-read="afterRead"
+                bind:delete="daleteImage"/>
+            </view>
+          </view>
+
+          <view class="warming-word">
+            <text>注：您的反馈举报信息将在1个工作日内受理，请尽快提交完整的反馈举报描述与材料，无需重复举报反馈，感谢您的配合</text>
+          </view>
+          <van-toast id="van-toast" />
+          
+        </van-radio-group>
+      </view>
+    </view>
+ </scroll-view>

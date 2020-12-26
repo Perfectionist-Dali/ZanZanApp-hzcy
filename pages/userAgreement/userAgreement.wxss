@@ -1,0 +1,18 @@
+.content{
+  margin:15px;
+}
+.title{
+  width:100%;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+.title1{
+  font-weight: bold;
+  font-size: 16px;
+}
+.content-details{
+  font-size: 14px;
+  letter-spacing: 3rpx;
+  line-height: 25px;
+}

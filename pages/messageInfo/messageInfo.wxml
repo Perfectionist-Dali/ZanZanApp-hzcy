@@ -1,0 +1,51 @@
+<scroll-view scroll-y 
+  scroll-into-view="{{toView}}"
+  style="height:100vh"
+  scroll-with-animation="true"
+  bindscrolltolower="loadMoreReply"
+  >
+
+  <view style="width:100%;display: inline-block;text-align:center;">
+      <view style="width:100%;height:15px;"></view>
+
+      <view wx:if="{{msgList.length == 0}}" class="no_msg_view">
+        <text>无新消息~</text>
+      </view>
+      <block wx:for-items="{{msgList}}" wx:key="id">
+        <view class="agree-user" data-dynamicid="{{item.dynamicId}}" data-index="{{index}}" data-msgnum="{{item.msgNum}}" data-msgtype="{{item.msgType}}" bindtap="showDynamicDetails">
+          <view class="comments_details">
+            <view class="comments_userPic">
+              <image class="comments_user_headpic" src="{{item.headImageUrl}}"></image>
+            </view>
+            <view class="comments_detail">
+              <view class="msg-user-info">
+                <view class="user_name">{{item.nickName}}</view>
+                <view class="msg_info">
+                  <block wx:if="{{item.msgNum > 1}}">等{{item.msgNum}}人</block>
+                  <block wx:if="{{item.msgType == 1}}">赞</block>
+                  <block wx:if="{{item.msgType == 2}}">转发</block>
+                  <block wx:if="{{item.msgType == 3}}">评论</block>了你的动态
+                </view>
+                <view class="msg_time">{{item.msgTime}}</view>
+              </view>
+              
+              <view class="msg-dynamic-info" wx:if="{{item.imagesUrl == null || '' == item.imagesUrl}}">
+                {{item.content}}
+              </view>
+              <view class="msg-dynamic-info" wx:if="{{item.imagesUrl != null && '' != item.imagesUrl}}">
+                <van-image width="4.2rem" height="4.2rem" fit="cover" src="{{item.imagesUrl}}"/>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+
+      <view style="width:100%;height:80px;">
+        <view class="weui-loadmore" wx:if="{{loadingmore}}">
+          <view class="weui-loading"></view>
+          <view class="weui-loadmore__tips">正在加载</view>
+        </view>
+      </view>
+    
+  </view>
+</scroll-view>

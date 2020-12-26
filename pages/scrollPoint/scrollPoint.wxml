@@ -1,0 +1,16 @@
+<view class='container'>
+  <view class='left'>
+    <scroll-view class='leftScroll' scroll-y>
+      <block wx:for="{{list}}" wx:key="list">
+        <view bindtap='clickScroll' data-id="{{item}}">{{item}}</view>
+      </block>
+    </scroll-view>
+  </view>
+  <view class='right'>
+    <scroll-view class='rightScroll' scroll-y scroll-into-view="{{toView}}" scroll-with-animation="true" >
+      <block wx:for="{{list}}" wx:key="list">
+        <view bindtap='clickScroll' id="{{item}}">{{item}}</view>
+      </block>
+    </scroll-view>
+  </view>
+</view>

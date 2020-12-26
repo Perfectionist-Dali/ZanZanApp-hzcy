@@ -1,0 +1,140 @@
+@import '../../style/weui.wxss';
+
+.discuss-text{
+  display: inline-block;
+  width: 90%;
+  text-align: left;
+  margin-top: 16px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  color:#3C3C3C;
+}
+.comments_details-top{
+  display: inline-block;
+  width: 90%;
+  text-align: left;
+  margin-top: 15px;
+  font-size: 15px;
+  color: #6C6C6C;
+  position: relative;
+  bottom: 12px;
+}
+.comments_details{
+  display: inline-block;
+  width: 92%;
+  text-align: left;
+  font-size: 15px;
+  color: #6C6C6C;
+  position: relative;
+  top: 10px;
+}
+.comments_userPic{
+  float: left;
+  display: flex;
+  flex-direction: column;
+  width: 54px;
+}
+.comments_user_headpic{
+  float: left;
+  width: 42px;
+  height: 42px;
+  border-radius: 22px;
+}
+.comments_details-top{
+  display: inline-block;
+  width: 90%;
+  text-align: left;
+  margin-top: 15px;
+  font-size: 15px;
+  color: #6C6C6C;
+  position: relative;
+  bottom: 12px;
+}
+.comments_detail-top{
+  position: relative;
+  left: 5px;
+  float: left;
+  width: 84%;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  margin-left: 6px;
+}
+.comments_detail-top .discuss{
+  font-size: 16px;
+}
+.comments_detail{
+  float: left;
+  width: 81%;
+  display: flex;
+}
+.user_name{
+  color:#6E6E6E;
+  width: 100%;
+  font-size: 15px;
+  font-weight: bold;
+}
+.msg_info{
+  color:#3C3C3C;
+  width: 100%;
+  font-size: 14px;
+}
+.msg_time{
+  color: #A4A4A4;
+  width: 100%;
+  font-size: 13px;
+  height: 33px;
+  line-height: 33px;
+}
+.discuss_footer{
+  font-size: 13px;
+  color:#ADADAD;
+  height: 30px;
+}
+.discuss_footer text{
+  position: relative;
+  top: 15px;
+  float: left;
+}
+.agree-user{
+  width:100%;
+  height: 90px;
+  border-bottom: 1px solid #F0F0F0;
+}
+.agreeuser-view{
+  position:fixed;
+  width:100%;
+  height: 55px;
+  background: #fff;
+  z-index: 999;
+  border-bottom: 1px solid rgb(248, 248, 248);
+}
+.weui-loadmore__tips{
+  color:#ff7575;
+}
+.user_center_gender{
+  width: 12px;
+  height: 12px;
+}
+.msg-user-info{
+  float: left;
+  width:70%;
+  height:100%;
+  
+}
+.msg-dynamic-info{
+  float: left;
+  width:30%;
+  height:100%;
+  font-size: 13px;
+  text-align: right;
+}
+.no_msg_view{
+  width:100%;
+  margin-top: 30px;
+}
+.no_msg_view >text{
+  color:#A4A4A4;
+  font-size: 14px;
+}

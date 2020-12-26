@@ -1,0 +1,232 @@
+/* miniprogram/pages/releaseDynamicMes/releaseDynamicMes.wxss */
+@import '../../style/weui.wxss';
+
+.navbar {
+  z-index: 2;
+  /*background-color: #F0F0F0;*/
+  width: 100%;
+  height: 50px;
+  flex: none;  
+  display: flex;
+}
+
+.navbar .item{  
+  position: relative;   
+  text-align: center;  
+  font-size: 16px;
+  line-height: 80rpx; 
+  flex: auto;
+  display: inline-block;
+}  
+
+.navbar .item.active{  
+  color: black;
+}  
+
+.navbar .item.active:after{  
+  content: "";  
+  display: block; 
+  position: absolute;  
+  bottom: 0;  
+  left: 0;  
+  right: 0; 
+  height: 4rpx;  
+  background: black;  
+}
+
+.un-release{
+  left:10rpx;
+  color:#3C3C3C;
+  margin: 14px 0 0 8px;
+}
+
+.release-mes{
+  right:20rpx;
+  margin: 14px 8px 0 0px;
+}
+
+.un-release-btn{
+  text-align: center;
+  width:48px;
+  height:30px;
+  line-height: 32px;
+  font-size: 18px;
+}
+
+.release-mes-btn{
+  float: right;
+  text-align: center;
+  width:48px;
+  height:30px;
+  background-color: #d13d4b;
+  color:#FFFFFF;
+  border-radius: 4px;
+  line-height: 30px;
+}
+
+/* .app-poster-container {
+  width: 100%;
+  height: 100%;
+} */
+
+.body {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.text-area-wrapper {
+  padding: 30rpx 20rpx;
+  width: 85%;
+  height: 230rpx;
+  position: relative;
+}
+
+textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.text-area-footer {
+  font-size: 20rpx;
+  color: #aaa;
+  text-align: end;
+  padding-right: 20rpx;
+}
+
+.image-area {
+  padding: 30rpx 20rpx;
+  width: 85%;
+  height: 80px;
+  position: relative;
+}
+
+.image-outer {
+  width: 33%;
+}
+
+.footer {
+  border-top: 3rpx solid #aaa;
+  display: flex;
+  position: fixed;
+  height: 120rpx;
+  bottom: 0;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 100;
+}
+
+.footer-btn {
+  font-size: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+}
+
+.write-message {
+    font-size: 13px;
+}
+
+.more-link{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  width:100%;
+}
+
+.link-btn{
+  color:#3C3C3C;
+  font-size: 17px;
+  width: 92%;
+  border-bottom: 1px #F0F0F0 solid;
+  line-height: 12px;
+}
+
+.link-icon1 {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  bottom: 13px;
+}
+
+.link-btn > text{
+  position: relative;
+  left:12px;
+  bottom:8px;
+}
+
+.point-to{
+  position: relative;
+  float:right;
+  width:8px;
+  height:14px;
+  right:5px;
+  top: 2px;
+}
+
+.page__bd{
+  width: 92%;
+}
+.delete{
+  position: relative;
+  left: 170rpx;
+  width: 10px;
+  height: 10px;
+}
+
+.deleteimg{
+  width: 16px;
+  height: 16px;
+  position: relative;
+  top: -206rpx;
+}
+.weui-uploader__file{
+  margin-top: 15px;
+}
+.choose_dynamic_view{
+  display: inline-block;
+  height: 46px;
+  width: 90%;
+  text-align: center;
+}
+.choose_dynamic{
+  display: inline-block;
+  width: 100%;
+  height:46px;
+  line-height: 46px;
+  text-align: left;
+}
+.DynamicType_label{
+  margin-left: 12px;
+  color:#1C1C1C;
+  font-size: 16px;
+  float: left;
+}
+.DynamicType{
+  float: left;
+  width: 100px;
+  font-size: 16px;
+  color:#424242;
+  text-align: center;
+}
+.DynamicType_more{
+  width: 16px;
+  height: 16px;
+  float: left;
+  margin-left: 14px;
+  margin-top: 15px;
+  float: right;
+}
+.show_more{
+  width: 30px;
+  height: 45px;
+  float: right;
+}

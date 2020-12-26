@@ -1,0 +1,262 @@
+<!--discountCounpon.wxml-->
+<import src="../../common/wxmlMessageListTemplate.wxml" />
+<import src="../../common/wxmlSearchTemplate.wxml" />
+
+<view class="page {{showView?'show':'hide'}}">
+	<view class="navbar" style="z-index:{{istrue ? 0 : 99}}" wx:if="{{isShowIndexMes}}">
+		<view style='text-align:left;' class="item" wx:key="unique" bindtap="onShowLeftPopup">
+      <image class="mine-info" src="{{imageHost}}/images/icons/m-index_27.png"></image>
+      <block wx:if="{{messageTotalNums > 0 && messageTotalNums <= 99}}">
+        <view class="weui-badge" style="position: absolute;top:0.8em;">{{messageTotalNums}}</view>
+      </block>
+      <block wx:if="{{messageTotalNums > 99}}">
+        <view class="weui-badge" style="position: absolute;top:0.8em;">99+</view>
+      </block>
+    </view>
+    <view style='text-align:center;' class="item" wx:key="unique" bindtap="showTopPopup">
+      <image class="select-show" src="{{imageHost}}/images/icons/arrow_drop_select.png"></image>
+    </view>
+    <view style='text-align:right;' class="item" wx:key="unique">
+      <image class="release-dynamic" src="{{imageHost}}/images/icons/easyicon.net8.png" bindtap="releaseDynamicMes"></image>
+    </view>
+	</view>
+
+  <view class="weui-loadmore" wx:if="{{isShowLoadingBar}}" style="opacity:{{istrue ? 0 : 1}}">
+    <view class="weui-loading" style="position: relative;bottom: 8px;"></view>
+    <view class="weui-loadmore__tips" style="position: relative;bottom: 8px;">正在加载</view>
+  </view>
+  <view style="z-index:{{istrue ? -1:0}};opacity:{{istrue ? 0:1}}">
+    <view class="complete-PullDownRefresh" style="display:{{isPullDownRefreshComplete}};">刷新完成</view>
+    <view style="display:{{showSearchTool}};">
+      <template is="couponSearchTemplate" data="{{...search_item}}"/>
+    </view>
+  </view>
+  
+  <view style="margin-top: 18px;" class="noInfoView" wx:if="{{dynamicList.length == 0}}">
+    <view style="margin-top:55px;" wx:if="{{isShowIndexMes}}">
+      <text class="noInfoWarn">{{dataResWarning}}</text>
+    </view>
+  </view>
+
+  <view class="gotop" hidden='{{!cangotop}}'catchtap="goTop">
+    <!-- <view>回到顶部</view> -->
+    <image class="back-up" src="{{imageHost}}/images/icons/iconfont-fanhui.png"></image>
+  </view>
+  <view style="margin-top:6px;z-index: -1;" wx:if="{{dynamicList.length > 0 && isShowIndexMes}}">
+    <block wx:for-items="{{dynamicList}}" wx:key="id">
+      <view class="dynamicItem">
+        <view class="dynamicItemFlex">
+          <view class="dynamicItem-left">
+            <image bindtap="showUserInfo" data-userid="{{item.userId}}" class="mes-userheader-img" src="{{item.userHeadImage}}"></image>
+          </view>
+          
+          <view class="dynamicItem-middle">
+            <view class="dynamic-info-head">
+              <view bindtap="showUserInfo" data-userid="{{item.userId}}" class="dynamicTitle">{{item.userNickname}}</view>
+              <view style="float:right;width:100%;">
+                <block wx:if="{{item.gender==1}}">
+                  <image class="user_center_gender" src="{{imageHost}}/images/icons/male.png"></image>
+                  <text class="user_center_gender_male">男</text>
+                </block>
+                <block wx:if="{{item.gender==2}}">
+                  <image class="user_center_gender" src="{{imageHost}}/images/icons/female.png"></image>
+                  <text class="user_center_gender_female">女</text>
+                </block>
+              </view>
+
+
+              <view wx:if="{{item.userId != logonUserId}}" class="close_mes_view" data-complaintnums="{{item.complaintNum}}" data-dynamicid="{{item.dynamicId}}" data-usernickname="{{item.userNickname}}" data-createuserid="{{item.userId}}" bindtap="openComplaintDialog">
+                <image class="close_mes" src="{{imageHost}}/images/icons/close_mes.png"></image>
+              </view>
+            </view>
+            
+            <view class="dynamicTimeStamp" data-index="{{index}}" data-dynamicid="{{item.dynamicId}}"  bindtap="showDynamicDetails">
+              <view wx:if="{{item.complaintNum > 3 && item.userId == logonUserId}}" class="complain-warning">
+                该动态被举报多次！
+              </view>
+              <text space="ensp" decode="{{true}}">{{item.dynamicContent}}</text>
+              <text class="more-info-text" wx:if="{{showMoreInfo}}">...</text>
+            </view>
+            <view class="index-dynamic-images-view">
+              <block wx:for-items="{{item.imgUrls}}" wx:for-item="img" wx:key="imgId">
+                <view class="weui-uploader__file dynamic-image-size">
+                  <image class="weui-uploader__img" style="{{item.imgWidth}}{{item.imgHeight}}" bindtap="previewImage" id="{{img}}" src="{{img}}" data-urls="{{item.imgUrls}}" mode="aspectFill" />
+                </view>
+              </block>
+            </view>
+            <view class="more-info" data-index="{{index}}" data-dynamicid="{{item.dynamicId}}" bindtap="showDynamicDetails">
+              <view class="more-info">详情..
+              </view>
+            </view>
+            <view class="dynamic-boot-view">
+              <view class="dynamic-boot-info">
+                <text class="send-time-text">{{item.sendTime}}</text>
+                <block wx:if="{{item.userId == logonUserId}}">
+                  <view class="dynamic-delete" data-dynamicid="{{item.dynamicId}}" data-index="{{index}}" bindtap="deleteDynamic">删除</view>
+                </block>
+              </view>
+            </view>
+            <view class="operate-icons">
+                <view class="message-operate-info">
+                  <view class="click-agree-view">
+                    <button open-type="share" data-dynamicid="{{item.dynamicId}}" data-dynamicindex="{{index}}" data-username="{{item.userNickname}}" data-dynamicuserid="{{item.userId}}" class="share-dynamic-btn">
+                      <text class="share-num-btn">{{item.sendOthersNum>0?item.sendOthersNum:"分享"}}</text>
+                      <image class="share-mes" style="width:21px;height:21px;top:11px" src="{{imageHost}}/images/icons/output_64.png"/>
+                    </button>
+                  </view>
+                </view>
+                <view class="message-operate-info">
+                  <view class="click-agree-view" data-index="{{index}}" data-dynamicid="{{item.dynamicId}}" bindtap="commentDynamic">
+                    <text class="share-num">{{item.commentNum>0?item.commentNum:"评论"}}</text>
+                    <image class="share-mes" style="width:23px;height:23px;" src="{{imageHost}}/images/icons/comment_64px.png"/>
+                  </view>
+                </view>
+                <view class="message-operate-info">
+                  <view class="click-agree-view" data-clickagree="{{item.dynamicAgree}}" data-dynamicuserid="{{item.userId}}" data-dynamicid="{{item.dynamicId}}" bindtap="agreeDynamic">
+                    <text class="share-num">{{item.agreeNum>0?item.agreeNum:"点赞"}}</text>
+                    <image class="share-mes" style="width:19px;height:19px;margin-top:1px;" src="{{imageHost}}/images/icons/{{item.dynamicAgree?'already-agree.png':'agree.png'}}"/>
+                  </view>
+                </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <van-popup
+    show="{{showLeftPopup}}"
+    position="left"
+    custom-style="width:60%;height: 100%;"
+    bind:close="onCloseLeftPopup">
+    
+    <!-- <view class="close_mycenter_popup_view" bindtap="onCloseLeftPopup">
+      <image class="close_mycenter_popup" src="{{imageHost}}/images/icons/close_1.png"></image>
+    </view> -->
+    <view class="mycenter_view">
+      <view class="user_center_info" bindtap="showMyselfInfo">
+        <view style="float:left;width:30%;">
+          <image class="user_center_userheader" src="{{loginUserInfo.headImageUrl}}"></image>
+        </view>
+        <view style="float:left;width:70%;">
+          <view style="float:right;width:100%;position: relative;bottom:4px;">
+            <text class="user_center_nickname">{{loginUserInfo.nickName}}</text>
+          </view>
+          <view style="float:right;width:100%;margin-top: 2px;">
+            <image class="user_center_gender" wx:if="{{loginUserInfo.gender==1}}" src="{{imageHost}}/images/icons/male.png"></image>
+            <image class="user_center_gender" wx:if="{{loginUserInfo.gender==2}}" src="{{imageHost}}/images/icons/female.png"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <view class="user_center_menu">
+      <view class="my_menu">
+        <view class="my_dynamic_view" data-messagenums="{{messageNums}}" data-userid="{{loginUserInfo.userId}}" bindtap="showMyselfDynamic">
+          <image class="user_center_icon" src="{{imageHost}}/images/icons/new_48px.png"></image>
+          <text>我的动态</text>
+        </view>
+        <block wx:if="{{messageNums > 0}}">
+          <view class="weui-badge my_dynamic_msg" bindtap="showMyMessageInfo" data-userid="{{loginUserInfo.userId}}">{{messageNums}}</view>
+        </block>
+      </view>
+      <!-- <view class="my_menu">
+        <image class="user_center_icon" src="{{imageHost}}/images/icons/wallet_111.png"></image>
+        <text>我的钱包</text>
+      </view> -->
+      <!-- <view class="my_menu">
+        <image class="user_center_icon" src="{{imageHost}}/images/icons/comments_48px.png"></image>
+        <text>评论回复</text>
+      </view> -->
+      <!-- <view class="my_menu">
+        <image class="user_center_icon" src="{{imageHost}}/images/icons/comments_reply.png"></image>
+        <text>我的回复</text>
+      </view> -->
+      <view class="my_menu" data-userid="{{loginUserInfo.userId}}" data-type="{{'WatchSb'}}" bindtap="showMyselfInterestSb">
+        <image class="user_center_icon" src="{{imageHost}}/images/icons/start_favorite_48px.png"></image>
+        <text>关注的人</text>
+      </view>
+      <view class="my_menu" data-userid="{{loginUserInfo.userId}}" data-type="{{'fans'}}" bindtap="showMyselfInterestSb">
+        <image class="user_center_icon" style="margin-left: 1px;margin-top: 20px;height: 18px;width: 20px;" src="{{imageHost}}/images/icons/users_79.png"></image>
+        <text style="left: 11px;">我的粉丝</text>
+      </view>
+      <view class="my_menu" data-userid="{{loginUserInfo.userId}}" bindtap="showSysNotice">
+        <image class="user_center_icon" style="position:relative;left: 4px;height: 16px;width: 19px;" src="{{imageHost}}/images/icons/notification_58.net.png"></image>
+        <text style="bottom:2px;left: 13px;">通知</text>
+
+        <block wx:if="{{noticeNotReadNums > 0}}">
+          <view class="weui-badge my_notice_msg">{{noticeNotReadNums}}</view>
+        </block>
+      </view>
+      <view class="my_menu" data-userid="{{loginUserInfo.userId}}" bindtap="myLetter">
+        <image class="user_center_icon" style="position:relative;left: 4px;height: 13px;width: 16px;" src="{{imageHost}}/images/icons/envelope1.png"></image>
+        <text style="bottom: 1px;left: 17px;">私信</text>
+        <block wx:if="{{letterNotReadNums > 0}}">
+          <view class="weui-badge my_notice_msg">{{letterNotReadNums}}</view>
+        </block>
+      </view>
+      <!-- <view class="my_menu">
+        <image class="user_center_icon" src="{{imageHost}}/images/icons/settings_32px.png"></image>
+        <text>设置</text>
+      </view> -->
+    </view>
+    <view class="buttom_menu">
+      <view bindtap="onLogOut">
+        <text class="set_out">退出登录</text>
+      </view>
+    </view>
+  </van-popup>
+
+  <van-popup
+    show="{{showTopPopup}}"
+    position="top"
+    custom-style="width:100%;height: 30%;"
+    bind:close="onCloseTopPopup">
+    <view class="close_opt_popup_view" bindtap="onCloseTopPopup">
+      <image class="close_opt_popup" src="{{imageHost}}/images/icons/close_1.png"></image>
+    </view>
+    <view class="choose_dynamic_view">
+      <view class="choose_dynamic">
+        <picker bindchange="bindPickerDynamicTypeChange" value="{{seenDynamicTypeIndex}}" range="{{seenDynamicTypeList}}">
+          <view class="picker">
+            <text class="DynamicType_label">我要看</text>
+            <text class="DynamicType">{{seenDynamicTypeList[seenDynamicTypeIndex]}}</text>
+            <view class="show_more">
+              <image class="DynamicType_more" src="{{imageHost}}/images/icons/show_more1.png"></image>
+            </view>
+          </view>
+        </picker>
+      </view>
+    </view>
+  </van-popup> 
+
+  <van-dialog id="van-dialog" confirm-button-color="#ff7575"/>
+  <view class="weui-demo-dialog {{istrue ? 'weui-demo-dialog_show' : ''}}">
+    <view class="weui-mask" bindtap="closeComplaintDialog" catchtouchmove="true"></view>
+    <view class="weui-dialog__wrp" catchtouchmove="true">
+      <view class="weui-dialog" style="width: 100%;height: 100%;display: inline-block;">
+        <view class="handle_dynamic_view">
+          <view class="feedback-icon">
+            <image class="user_center_icon" src="{{imageHost}}/images/icons/chat_exclamation.png"></image>
+          </view>
+          <view class="feedback" data-complaintnums="{{dynamicComplaintNums}}" data-dynamicid="{{feedbackDynamicId}}" bindtap="onFeedback">
+            <view class="feedback-fankui">反馈/举报</view>
+            <view class="feedback-word">垃圾内容/广告</view>
+            <view class="feedback-word-more">
+              <image class="feedback-word-more_icon" src="{{imageHost}}/images/icons/arrow_triangle_down3.png"></image>
+            </view>
+          </view>
+        </view>
+
+        <view class="handle_dynamic_view handle_dynamic_line">
+          <view class="feedback-icon">
+            <image class="no_seen_icon" src="{{imageHost}}/images/icons/user_delete.png"></image>
+          </view>
+          <view class="no_seen" data-createuserid="{{createUserId}}" data-usernickname="{{userNickname}}" bindtap="onIntoBlacklist">
+            不再看：<text>{{userNickname}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,108 @@
+@import '../../style/weui.wxss';
+
+.container{
+    padding: 1.5rem;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+}
+.row{
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    width: 100%;
+}
+.row text{
+    flex-grow: 1;
+    text-align: right;
+}
+.row input{
+    font-size: 0.7rem;
+    color: #ccc;
+    flex-grow: 3;
+    border: 1px solid #0099CC;
+    display: inline-block;
+    border-radius: 0.3rem;
+    box-shadow: 0 0 0.15rem #aaa;
+    padding: 0.3rem;
+}
+.row button{
+    background: #d13d4b;
+    width: 100%;
+    padding: 0 2rem;
+    margin-top: 20px;
+    height: 50px;
+    line-height: 50px;
+}
+
+.row2{
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    width: 100%;
+}
+.row2 text{
+    flex-grow: 1;
+    text-align: right;
+}
+.row2 input{
+    font-size: 0.7rem;
+    color: #ccc;
+    flex-grow: 3;
+    border: 1px solid #0099CC;
+    display: inline-block;
+    border-radius: 0.3rem;
+    box-shadow: 0 0 0.15rem #aaa;
+    padding: 0.3rem;
+}
+.row2 button{
+    background: #FFFFFF;
+    color:#d13d4b;
+    border:1px solid #d13d4b;
+    width: 100%;
+    padding: 0 2rem;
+}
+.login-title{
+    float: left;
+    font-size: 32px;
+    width:100%;
+}
+.login-title-detail{
+    float: left;
+    font-size: 15px;
+    width:100%;
+    line-height: 50px;
+}
+.user-regist{
+    font-size: 16px;
+    color: #d13d4b;
+    float: left;
+  }
+
+.weui-cells_after-title {
+    margin-top: -1px;
+}
+.weui-cell__bd{
+    position: relative;
+    left: -14px;
+}
+
+.image-area {
+    padding: 30rpx 20rpx;
+    width: 85%;
+    height: 80px;
+    position: relative;
+}
+.image-outer {
+    width: 40%;
+}
+.upload-header-pic{
+    color:#6C6C6C;
+    font-size: 17px;
+}
+.hide{
+    display: none;
+}
+.show{ 
+    display: block;
+}

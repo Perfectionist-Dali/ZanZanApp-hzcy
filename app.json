@@ -1,0 +1,55 @@
+{
+  "pages": [
+    
+    
+    "pages/zanzan/zanzan",
+    "pages/userInfoSupply/userInfoSupply",
+    "pages/index/index",
+    "pages/userLogin/userLogin",
+    "pages/map/map",
+    "pages/friendlist/friendlist",
+    "pages/logs/logs",
+    "pages/businessLogin/businessLogin",
+    "pages/releaseDynamicMes/releaseDynamicMes",
+    "pages/dynamicDetails/dynamicDetails",
+    "component/image-wrapper/image-wrapper",
+    "pages/loginForCode/loginForCode",
+    "pages/loginForAccount/loginForAccount",
+    "pages/scrollPoint/scrollPoint",
+    "pages/userRegist/userRegist",
+    "pages/commentReply/commentReply",
+    "pages/dynamicAgreeUsers/dynamicAgreeUsers",
+    "pages/personalDetails/personalDetails",
+    "pages/uploadPortrait/uploadPortrait",
+    "pages/userInfoCenter/userInfoCenter",
+    "pages/fansOrWatchSb/fansOrWatchSb",
+    "pages/userDynamicList/userDynamicList",
+    "pages/myselfDynamicList/myselfDynamicList",
+    "pages/messageInfo/messageInfo",
+    "pages/setting/setting",
+    "pages/feedback/feedback",
+    "pages/searchInfo/searchInfo",
+    "pages/perfectSelfInfoSuc/perfectSelfInfoSuc",
+    "pages/userAgreement/userAgreement",
+    "pages/userPrivacyClause/userPrivacyClause",
+    "pages/sysNotice/sysNotice",
+    "pages/sysNoticeDetails/sysNoticeDetails",
+    "pages/talkLetter/talkLetter",
+    "pages/privateLetter/privateLetter"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#444444",
+    "navigationBarTitleText": "赞赞",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#E0E0E0",
+    "enablePullDownRefresh": false,
+    "onReachBottomDistance": 50
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "debug": false,
+  "sitemapLocation": "sitemap.json"
+}

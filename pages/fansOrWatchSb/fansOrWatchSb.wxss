@@ -1,0 +1,121 @@
+@import '../../style/weui.wxss';
+
+.discuss-text{
+  display: inline-block;
+  width: 90%;
+  text-align: left;
+  margin-top: 16px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  color:#3C3C3C;
+}
+.comments_details-top{
+  display: inline-block;
+  width: 90%;
+  text-align: left;
+  margin-top: 15px;
+  font-size: 15px;
+  color: #6C6C6C;
+  position: relative;
+  bottom: 12px;
+}
+.comments_details{
+  display: inline-block;
+  width: 90%;
+  text-align: left;
+  margin-top: 24px;
+  font-size: 15px;
+  color: #6C6C6C;
+  position: relative;
+  bottom: 12px;
+}
+.comments_userPic{
+  float: left;
+  display: flex;
+  flex-direction: column;
+  width: 14%;
+  align-items: center;
+}
+.comments_user_headpic{
+  float:left;
+  width: 42px;
+  height: 42px;
+  border-radius: 22px;
+}
+.comments_details-top{
+  display: inline-block;
+  width: 90%;
+  text-align: left;
+  margin-top: 15px;
+  font-size: 15px;
+  color: #6C6C6C;
+  position: relative;
+  bottom: 12px;
+}
+.comments_details{
+  display: inline-block;
+  width: 90%;
+  text-align: left;
+  margin-top: 24px;
+  font-size: 15px;
+  color: #6C6C6C;
+  position: relative;
+}
+.comments_detail-top{
+  position: relative;
+  left: 5px;
+  float: left;
+  width: 84%;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  margin-left: 6px;
+}
+.comments_detail-top .discuss{
+  font-size: 16px;
+}
+.comments_detail{
+  position: relative;
+  left: 5px;
+  float: left;
+  width: 80%;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 6px;
+}
+.user_name{
+  color:#3C3C3C;
+  font-size: 15px;
+}
+.discuss_footer{
+  font-size: 13px;
+  color:#ADADAD;
+  height: 30px;
+}
+.discuss_footer text{
+  position: relative;
+  top: 15px;
+  float: left;
+}
+.agree-user{
+  width:100%;
+  border-bottom: 1px solid #F0F0F0;
+}
+.agreeuser-view{
+  position:fixed;
+  width:100%;
+  height: 55px;
+  background: #fff;
+  z-index: 999;
+  border-bottom: 1px solid rgb(248, 248, 248);
+  background: #F2F2F2;
+}
+.weui-loadmore__tips{
+  color:#ff7575;
+}
+.user_center_gender{
+  width: 12px;
+  height: 12px;
+}

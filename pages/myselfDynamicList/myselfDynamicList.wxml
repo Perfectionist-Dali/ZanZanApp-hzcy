@@ -1,0 +1,79 @@
+<scroll-view scroll-y 
+  scroll-into-view="{{toView}}"
+  style="height:100vh"
+  scroll-with-animation="true"
+  bindscrolltolower="loadMoreDynamicList">
+
+  <view class="msg_not_read">
+    <block wx:if="{{dynamicNoticeNum > 0}}">
+      <view class="notification-alert">
+        <view class="notice-text" bindtap="showMyMessageInfo" data-userid="{{userId}}">
+          {{dynamicNoticeNum}}条动态消息未读
+        </view>
+      </view>
+    </block>
+    
+
+    <view style="margin-top:{{dynamicListMarginTop}}px;">
+      <block wx:for-items="{{dynamicList}}" wx:key="id">
+        <block wx:if="{{item.imgUrls.length>0}}">
+          <view class="dynamic-line">
+            <view class="comments_details">
+              <view class="comments_userPic" data-dynamicid="{{item.dynamicId}}" bindtap="showDynamicDetails">
+                <van-image width="4.5rem" height="4.5rem" fit="cover" src="{{item.imgUrls[0]}}"/>
+              </view>
+              <view class="comments_detail">
+                <view class="dynamic_detail" data-dynamicid="{{item.dynamicId}}" bindtap="showDynamicDetails">
+                  <view class="dynamicContent">{{item.dynamicContent}}</view>
+                  <view class="dynamic-warning" wx:if="{{item.complaintNum > 3 && item.userId == logonUserId}}">
+                    <image src="{{imageHost}}/images/icons/exclamation_mark.png"></image>
+                  </view>
+                </view>
+                <view style="float:right;width:100%;margin-top:3px;">
+                  <view class="images-num">
+                    {{item.imgUrls.length}}张图片
+                  </view>
+                  <view class="send-date">
+                    {{item.sendTime}}
+                  </view>
+                  <view class="delete-dynamic" data-index="{{index}}" data-dynamicid="{{item.dynamicId}}" bindtap="deleteDynamic">
+                    删除
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+        <block wx:if="{{item.imgUrls.length==0}}">
+          <view class="dynamic-line">
+            <view class="comments_details">
+              <view class="comments_word">
+                <view class="dynamic_word_detail" data-dynamicid="{{item.dynamicId}}" bindtap="showDynamicDetails">
+                  <view class="dynamicContent">{{item.dynamicContent}}</view>
+                  <view class="dynamic-warning" wx:if="{{item.complaintNum > 3 && item.userId == logonUserId}}">
+                    <image src="{{imageHost}}/images/icons/exclamation_mark.png"></image>
+                  </view>
+                </view>
+                <view style="float:right;width:100%;margin-top:3px;">
+                  <view class="word-send-date">
+                    {{item.sendTime}}
+                  </view>
+                  <view class="delete-dynamic" data-index="{{index}}" data-dynamicid="{{item.dynamicId}}" bindtap="deleteDynamic">
+                    删除
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </block>
+      <van-dialog id="van-dialog" confirm-button-color="#ff7575"/>
+      <view style="width:100%;height:80px;">
+        <view class="weui-loadmore" wx:if="{{loadingmore}}">
+          <view class="weui-loading"></view>
+          <view class="weui-loadmore__tips">正在加载</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

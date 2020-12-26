@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "van-image": "../../miniprogram_npm/@vant/weapp/image/index",
+    "van-dialog": "../../miniprogram_npm/@vant/weapp/dialog/index"
+  },
+  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "我的动态"
+}

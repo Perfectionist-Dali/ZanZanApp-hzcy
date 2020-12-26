@@ -1,0 +1,11 @@
+<view class="container">
+      <text class="login-title">完善我的赞赞信息</text>
+      <view class="row">
+          <button type="primary" form-type="submit" open-type="getUserInfo" bindgetuserinfo="loginByWechat">使用微信头像、昵称</button>
+      </view>
+        
+      <view class="row2">
+          <button type="primary" bindtap="updateMyselfInfo">修改我的赞赞信息</button>
+      </view>
+  </view>
+

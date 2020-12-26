@@ -1,0 +1,96 @@
+<template name="couponSearchTemplate">
+    <view class="page__bd">
+        <view class="weui-search-bar" style="background-color:#F0F0F0;height: 56px;">
+            <view class="weui-search-bar__form">
+                <view class="weui-search-bar__box">
+                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <input type="text" class="weui-search-bar__input" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                    <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                        <icon type="clear" size="14"></icon>
+                    </view>
+                </view>
+                <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                    <icon class="weui-icon-search" type="search" size="14"></icon>
+                    <view class="weui-search-bar__text">搜索</view>
+                </label>
+            </view>
+            <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+        </view>
+        <view class="searchbar-result" wx:if="{{inputVal.length > 0}}">
+            <view class="search-classify">
+                <text>找人</text>
+            </view>
+            <navigator class="weui-cell rearch-res"  hover-class="weui-cell_active">
+                <view class="weui-cell__bd">
+                    <view class="comments_details">
+                        <view class="comments_userPic">
+                        <image bindtap="showUserInfo" data-userid="{{item.userId}}" class="comments_user_headpic" src="{{imageHostURL}}/portrait/20200906/8a8c88093ead48e8aef6650bb4ba1e0a.png"></image>
+                        </view>
+                        <view class="comments_detail">
+                        <view class="user_name" bindtap="showUserInfo" data-userid="{{item.userId}}">手机用户8000</view>
+                        <view style="float:right;width:100%;">
+                            <image class="user_center_gender" src="{{imageHostURL}}/images/icons/male.png"></image>
+                            <!-- <image class="user_center_gender" wx:if="{{item.gender==1}}" src="{{imageHost}}/images/icons/male.png"></image>
+                            <image class="user_center_gender" wx:if="{{item.gender==2}}" src="{{imageHost}}/images/icons/female.png"></image> -->
+                        </view>
+                        </view>
+                    </view>
+                </view>
+            </navigator>
+            <navigator url="" class="weui-cell rearch-res" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">
+                    <view class="comments_details">
+                        <view class="comments_userPic">
+                        <image bindtap="showUserInfo" data-userid="{{item.userId}}" class="comments_user_headpic" src="{{imageHostURL}}/portrait/20200913/0bd55308635f4f36ba2a1cb0ccfea5aa.png"></image>
+                        </view>
+                        <view class="comments_detail">
+                        <view class="user_name" bindtap="showUserInfo" data-userid="{{item.userId}}">洒水大放</view>
+                        <view style="float:right;width:100%;">
+                            <image class="user_center_gender" src="{{imageHostURL}}/images/icons/male.png"></image>
+                            <!-- <image class="user_center_gender" wx:if="{{item.gender==1}}" src="{{imageHost}}/images/icons/male.png"></image>
+                            <image class="user_center_gender" wx:if="{{item.gender==2}}" src="{{imageHost}}/images/icons/female.png"></image> -->
+                        </view>
+                        </view>
+                    </view>
+                </view>
+            </navigator>
+            <view class="search-classify">
+                <text>动态</text>
+            </view>
+            <navigator url="" class="weui-cell rearch-res" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">
+                    <view class="dynamic-line">
+                        <view class="comments_details">
+                            <view class="comments_userPic" data-dynamicid="{{item.dynamicId}}">
+                            <van-image width="4.5rem" height="4.5rem" fit="cover" src="{{imageHostURL}}/upload-images/20200725/ff3409f556cd4821af672b92b428ada6.jpg"/>
+                        </view>
+                        <view class="comments_detail">
+                            <view class="dynamic_detail" data-dynamicid="{{item.dynamicId}}" bindtap="showDynamicDetails">代打上王者588，打不过退570，直接转...</view>
+                                <view style="float:right;width:100%;height: 30px;line-height: 46px;">
+                                <view class="images-num">2张图片</view>
+                                <view class="send-date">
+                                    07-25 14:21
+                                </view>
+                            </view>
+                        </view>
+                        </view>
+                    </view>
+
+                    <view class="dynamic-line">
+                        <view class="comments_details">
+                            <view class="comments_word">
+                                <view class="dynamic_word_detail" data-dynamicid="{{item.dynamicId}}" bindtap="showDynamicDetails">♡ʜᴀᴘᴘʏ ʙɪʀᴛʜᴅᴀʏ ᴛᴏ ᴍ...</view>
+                                <view style="float:right;width:100%;margin-top:3px;">
+                                <view class="word-send-date">
+                                    07-27 00:36
+                                </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+    </view>
+    <!--</view>-->
+</template>

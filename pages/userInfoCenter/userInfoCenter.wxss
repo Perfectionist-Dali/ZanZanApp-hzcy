@@ -1,0 +1,174 @@
+.user-info-page{
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+}
+.user-info-view{
+  width: 100%;
+  display: inline-block;
+}
+.user-info-line{
+  margin-top: 30px;
+  width:90%;
+  display: inline-block;
+}
+.city-area{
+  width: 100%;
+  text-align: left;
+  font-size: 14px;
+  color: #ffff;
+  height: 30px;
+  line-height: 30px;
+}
+.user-sign-info{
+  position: relative;
+  width:90%;
+  display: inline-block;
+  margin-top:20px;
+  margin-bottom: 25px;
+}
+.dynamic-line-height{
+  position: relative;
+  top: 100rpx;
+  width: 90%;
+  display: inline-block;
+  height: 70px;
+}
+.user-avatar{
+  position: relative;
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+}
+.user-name{
+  width: 66%;
+  float: left;
+  position: relative;
+  top: 10px;
+}
+.dynamic-text{
+  width:42px;
+  float: left;
+  position: relative;
+  top:25px;
+}
+.user-name-text{
+  width:100%;
+  text-align:left;
+  font-size:20px;
+  font-weight:450;
+  color: #ffff;
+}
+
+.user-dynamic-text{
+  width:100%;
+  text-align:left;
+  font-size:18px;
+}
+.user-zzcode-text{
+  width:100%;
+  text-align:left;
+  font-size:15px;
+  color:#ffff;
+  margin-top: 5px;
+}
+.user-gender{
+  width:100%;
+  text-align:left;
+  margin-top: 6px;
+}
+.user_center_gender{
+  width: 14px;
+  height: 14px;
+}
+.line{
+  width: 100%;
+  height: 10rpx;
+  background-color:#F0F0F0;
+}
+.solid-line{
+  width: 100%;
+  height: 3rpx;
+  background-color:#F0F0F0;
+}
+.dynamic-content{
+  float:right;
+  width:84%;
+  height:100%;
+}
+.dynamic-images{
+  float:left;
+  text-align: left;
+  width:70%;
+  height:100%;
+}
+.dynamic-more-show{
+  float:right;
+  width: 70px;
+  height:100%;
+}
+.point-to{
+  position: relative;
+  float:right;
+  width:8px;
+  height:14px;
+  right:5px;
+  top:32px;
+}
+.dynamic-num{
+  text-align: center;
+  height: 19px;
+  background: #E0E0E0;
+  border-radius: 100px;
+  font-size: 13px;
+  float: left;
+  position: relative;
+  top:30px;
+}
+.dynamic-num > text{
+  margin:8px;
+}
+.dynamicImage{
+  position: relative;
+  top: 16px;
+  left:3px;
+  margin: 2px;
+}
+.user-fans-nums{
+  position: relative;
+  width:90%;
+  height: 50px;
+  display: inline-block;
+  margin-bottom: 25px;
+}
+.fans-text{
+  float: left;
+  width:100px;
+  height:30px;
+}
+.fans-nums{
+  width:100%;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffff;
+}
+.fans-label{
+  width:100%;
+  height:30px;
+  font-size: 12px;
+  color: #ffff;
+}
+.user_center_gender_male{
+  position: relative;
+  left: 5px;
+  bottom: 2px;
+  font-size: 11px;
+  color:#62AADF;
+}
+.user_center_gender_female{
+  position: relative;
+  left: 5px;
+  bottom: 3px;
+  font-size: 11px;
+  color:#DE70B9;
+}

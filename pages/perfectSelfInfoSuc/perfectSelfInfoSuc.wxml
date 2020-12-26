@@ -1,0 +1,6 @@
+
+<view class="logo-style">
+  <view class="slogan">恭喜！您的赞赞信息填写成功!</view>
+  <view class="go-zanzan" bindtap="goZanzan">点击这里开始您的赞赞之旅吧 >></view>
+</view>
+

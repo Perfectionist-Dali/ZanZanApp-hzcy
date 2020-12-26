@@ -1,0 +1,15 @@
+{
+  "usingComponents": {
+    "van-uploader": "../../miniprogram_npm/@vant/weapp/uploader/index",
+    "van-field": "../../miniprogram_npm/@vant/weapp/field/index",
+    "van-button": "../../miniprogram_npm/@vant/weapp/button/index",
+    "van-image": "../../miniprogram_npm/@vant/weapp/image/index",
+    "van-radio": "../../miniprogram_npm/@vant/weapp/radio/index",
+    "van-radio-group": "../../miniprogram_npm/@vant/weapp/radio-group/index",
+    "van-popup": "../../miniprogram_npm/@vant/weapp/popup/index",
+    "van-picker": "../../miniprogram_npm/@vant/weapp/picker/index",
+    "van-datetime-picker": "../../miniprogram_npm/@vant/weapp/datetime-picker/index"
+  },
+  "navigationBarTitleText": "个人信息",
+  "enablePullDownRefresh": false
+}

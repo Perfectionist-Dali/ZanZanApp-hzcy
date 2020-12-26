@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "van-popup": "../../miniprogram_npm/@vant/weapp/popup/index",
+    "van-dialog": "../../miniprogram_npm/@vant/weapp/dialog/index",
+    "van-image": "../../miniprogram_npm/@vant/weapp/image/index"
+  },
+  "backgroundTextStyle": "light",
+  "backgroundColor": "#FFFFFF",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 50
+}

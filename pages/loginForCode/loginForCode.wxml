@@ -1,0 +1,22 @@
+<!--pages/login/login.wxml-->
+<view class="container">
+    <text class="login-title">请输入验证码</text>
+    <view class="login-title-detail">
+        <text>验证码已通过短信发送至</text>
+        <text class="agreement">+86</text>
+        <text class="clause">{{userMobile}}</text>
+    </view>
+
+    <form style="width: 100%;margin-top: 20px;" bindsubmit="formSubmit">
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell ">
+                <view class="weui-cell__bd" style="margin-left: -14px;">
+                    <input type='text' class="weui-input" name='smsCode' value="{{code}}" placeholder="请输入验证码" />
+                </view>
+            </view>
+        </view>
+        <view class="row">
+            <button type="primary" form-type="submit">登录</button>
+        </view>
+    </form>
+</view>

@@ -1,0 +1,72 @@
+<view class="user-info-page">
+  <scroll-view scroll-y="false" scroll-x="false"
+    style="height:100vh"
+    scroll-with-animation="true">
+    <view class="user-info-view">
+      <view style="width:100%;height:690rpx;background:url('{{userImageUrl}}')no-repeat;background-size:100% 100%;filter: blur(8px);position:absolute;"></view>
+      <view style="width:100%;height:710rpx;;background:#272727;opacity:0.6;position:absolute;"></view>
+      <view style="width:100%;">
+        <view class="user-info-line">
+          <view class="user-name">
+            <view class="user-name-text">{{userInfo.nickName}}</view>
+            <view class="user-gender">
+              <block wx:if="{{userInfo.gender==1}}">
+                <image class="user_center_gender" src="{{imageHost}}/images/icons/male.png"></image>
+                <text class="user_center_gender_male">男</text>
+              </block>
+              <block wx:if="{{userInfo.gender==2}}">
+                <image class="user_center_gender" src="{{imageHost}}/images/icons/female.png"></image>
+                <text class="user_center_gender_female">女</text>
+              </block>
+
+            </view>
+            <view class="city-area">{{userInfo.province}} {{userInfo.city}}</view>
+            <view class="user-zzcode-text">赞赞号：{{userInfo.zanCode}}</view>
+            <view class="user-zzcode-text">微信号：{{userInfo.wechatCode}}</view>
+          </view>
+          <view style="width:32%;height:120px;float: right;text-align:center;">
+            <image src="{{userImageUrl}}" bindtap="previewImage" id="{{userImageUrl}}" data-urls="{{fileList}}" class="user-avatar"></image>
+            <block wx:if="{{userInfo.userId != userInfo.loginUserId}}">
+              <block wx:if="{{!userInfo.interestUser}}">
+                <van-button color="#d13d4b" custom-style="font-size:14px;margin-top:14px;" type="primary" size="small" data-operatetype="interest" data-userid="{{userInfo.userId}}" data-isinterest="{{userInfo.isInterest}}" bind:click="opereatInterestUser" disabled="{{disabledBtn}}">+关注</van-button>
+              </block>
+              <block wx:if="{{userInfo.interestUser}}">
+                <van-button color="#d13d4b" custom-style="font-size:14px;margin-top:14px;" type="primary" size="small" data-operatetype="cancelInterest" data-userid="{{userInfo.userId}}" data-isinterest="{{userInfo.isInterest}}" bind:click="opereatInterestUser" disabled="{{disabledBtn}}">取消关注</van-button>
+              </block>
+            </block>
+          </view>
+        </view>
+        <view class="user-sign-info">
+          <view class="user-zzcode-text">签名：{{userInfo.signature}}</view>
+        </view>
+        <view class="user-fans-nums">
+          <view class="fans-text" data-userid="{{userInfo.userId}}" data-nums="{{userInfo.fansNum}}" data-type="{{'fans'}}" bindtap="showFansOrWatchSb">
+            <view class="fans-nums">{{userInfo.fansNum}}</view>
+            <view class="fans-label">粉丝</view>
+          </view>
+          <view class="fans-text" data-userid="{{userInfo.userId}}" data-nums="{{userInfo.interestUserNum}}" data-type="{{'WatchSb'}}" bindtap="showFansOrWatchSb">
+            <view class="fans-nums">{{userInfo.interestUserNum}}</view>
+            <view class="fans-label">关注</view>
+          </view>
+        </view>
+        <view class="dynamic-line-height" id="dynamicNumsView" bindtap="showUserDynamicList" data-userid="{{userInfo.userId}}" data-userimageurl="{{userImageUrl}}" data-dynamiccount="{{userInfo.dynamicNums}}">
+          <view class="dynamic-text">
+            <view class="user-dynamic-text">动态</view>
+          </view>
+          <view class="dynamic-content">
+            <view class="dynamic-images">
+              <block wx:for="{{userInfo.dynamicImageList}}" wx:key="key">
+                <van-image class="dynamicImage" width="3rem" height="3rem" fit="cover" src="{{item}}"/>
+              </block>
+            </view>
+            <view class="dynamic-more-show">
+              <view class="dynamic-num"><text>{{userInfo.dynamicNums}}条</text></view>
+              <image class="point-to" src="{{imageHost}}/images/icons/show_more2.png"/>
+            </view>
+          </view>
+        </view>
+      </view>
+      
+    </view>
+  </scroll-view>
+</view>

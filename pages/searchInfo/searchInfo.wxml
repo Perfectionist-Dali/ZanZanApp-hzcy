@@ -1,0 +1,80 @@
+
+<scroll-view scroll-y 
+  scroll-into-view="{{toView}}"
+  style="height:100vh"
+  scroll-with-animation="true"
+  bindscrolltolower="">
+
+  <view class="msg_not_read">
+    <view class="notification-alert">
+      <van-search
+        value="{{ value }}"
+        placeholder="请输入搜索关键词"
+        background="#F0F0F0"
+        focus="{{true}}"
+        show-action
+        bind:search="onSearch"
+        bind:cancel="onCancel"
+      />
+    </view>
+
+    <view class="searchbar-result">
+      <block wx:if="{{searchUserListNums > 0}}">
+        <view class="search-classify">
+            <text>找人</text>
+        </view>
+        <block wx:for-items="{{searchUserList}}" wx:key="id">
+          <view class="comments_details">
+            <view class="comments_userPic">
+            <image bindtap="showUserInfo" data-userid="{{item.userId}}" class="comments_user_headpic" src="{{item.headImageUrl}}"></image>
+            </view>
+            <view class="comments_detail">
+            <view class="user_name" bindtap="showUserInfo" data-userid="{{item.userId}}">{{item.nickName}}</view>
+            <view style="float:right;width:100%;">
+                <image class="user_center_gender" wx:if="{{item.gender==1}}" src="{{imageHostURL}}/images/icons/male.png"></image>
+                <image class="user_center_gender" wx:if="{{item.gender==2}}" src="{{imageHostURL}}/images/icons/female.png"></image>
+            </view>
+            </view>
+          </view>
+        </block>
+      </block>
+
+      <block wx:if="{{searchDynamicListNums > 0}}">
+        <view class="search-classify">
+          <text>动态</text>
+        </view>
+        <block wx:for-items="{{searchDynamicList}}" wx:key="id">
+          <block wx:if="{{item.imgUrls.length>0}}">
+            <view class="comments_details dynamic-height">
+              <view class="comments_userPic" data-dynamicid="{{item.dynamicId}}" bindtap="showDynamicDetails">
+                <van-image width="4.5rem" height="4.5rem" fit="cover" src="{{item.imgUrls[0]}}"/>
+              </view>
+              <view class="comments_detail">
+                  <view class="dynamic_detail" data-dynamicid="{{item.dynamicId}}" bindtap="showDynamicDetails">{{item.dynamicContent}}</view>
+                  <view class="dynamic-boot">
+                    <view class="images-num">{{item.imgUrls.length}}张图片</view>
+                    <view class="send-date">
+                        {{item.sendTime}}
+                    </view>
+                  </view>
+              </view>
+            </view>
+          </block>
+          <block wx:if="{{item.imgUrls.length==0}}">
+            <view class="comments_details dynamic-height">
+              <view class="comments_word">
+                  <view class="dynamic_word_detail" data-dynamicid="{{item.dynamicId}}" bindtap="showDynamicDetails">{{item.dynamicContent}}</view>
+                  <view class="dynamic-boot">
+                    <view class="word-send-date">
+                        {{item.sendTime}}
+                    </view>
+                  </view>
+              </view>
+            </view>
+          </block>
+        </block>
+      </block>
+      
+    </view>
+  </view>
+</scroll-view>

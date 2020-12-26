@@ -1,0 +1,9 @@
+{
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#d13d4b",
+  "navigationBarTitleText": "赞赞",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#d13d4b",
+  "enablePullDownRefresh": false,
+  "onReachBottomDistance": 50
+}

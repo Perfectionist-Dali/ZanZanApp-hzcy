@@ -1,0 +1,207 @@
+<view class="myself-info">
+  <scroll-view scroll-y 
+    style="height:100vh"
+    scroll-with-animation="true"
+    >
+    <view class="edit-myself-view">
+      <view class="edit-myself-btn">
+        <block wx:if="{{showInfo}}">
+          <van-button color="#d13d4b" hairline="{{true}}" custom-style="font-size:14px;" size="small" bind:click="updateMyselfInfo" plain>编辑</van-button>
+        </block>
+        <block wx:if="{{!showInfo}}">
+          <van-button color="#d13d4b" custom-style="font-size:14px;" type="primary" size="small" data-userid="{{loginUserInfo.userId}}" bind:click="submitMyselfInfo" disabled="{{disabledBtn}}">保存</van-button>
+        </block>
+      </view>
+      <view class='line'></view>
+
+      <view class="myself-info-view header-pic-view">
+        <view class="myself-info-label header-pic-text">头像</view>
+        <view class="myself-info-text" wx:if="{{showInfo}}">
+          <image src="{{src}}" bindtap="previewImage" id="{{src}}" data-urls="{{fileList}}" class="avatar"></image>
+        </view>
+        <view class="view-right" wx:if="{{!showInfo}}">
+          <view class="choose-image" bindtap="uploadHeadImage">选择照片</view>
+          <image src="{{src}}" bindtap="previewImage" id="{{src}}" data-urls="{{fileList}}" class="avatar"></image>
+        </view>
+      </view>
+      <view class='line-text'></view>
+      <view class="myself-info-view">
+        <view class="myself-info-label">性别</view>
+        <view class="myself-info-text" wx:if="{{showInfo}}">
+          
+          {{gender==2?'女':'男'}}
+        </view>
+        <view class="myself-info-text view-width" wx:if="{{!showInfo}}">
+          <view class="view-right" style="margin-top:18px;">
+            <van-radio-group name="male" value="{{gender}}"  bind:change="onChangeGender">
+              <view style="float:right;width:50px;">
+                <van-radio name="2" checked-color="#d13d4b">女</van-radio>
+              </view>
+              <view style="float:right;width:80px;">
+                <van-radio name="1" checked-color="#d13d4b">男</van-radio>
+              </view>
+            </van-radio-group>
+          </view>
+        </view>
+      </view>
+      <view class='line-text'></view>
+      <view class="myself-info-view">
+        <view class="myself-info-label">昵称</view>
+        <view class="myself-info-text" wx:if="{{showInfo}}">
+          {{nickname}}
+        </view>
+        <view class="myself-info-text view-width" wx:if="{{!showInfo}}">
+          <view>
+            <van-field
+              value="{{nickname}}"
+              size="large"
+              custom-style="color:#8E8E8E;"
+              maxlength="12"
+              placeholder="请输入昵称"
+              border="{{false}}"
+              focus="{{nicknameFocus}}"
+              input-align="right"
+              bind:change="onChangeNickname"/>
+          </view>
+        </view>
+        <image wx:if="{{!showInfo}}" bindtap="getNicknameFocus" class="myself_write" src="{{imageHost}}/images/icons/writing_32px.png"/>
+      </view>
+      <view class='line-text'></view>
+
+      <view class="myself-info-view">
+        <view class="myself-info-label">微信号</view>
+        <view class="myself-info-text" wx:if="{{showInfo}}">
+          {{wechatCode}}
+        </view>
+        <view class="myself-info-text view-width" wx:if="{{!showInfo}}">
+          <view>
+            <van-field
+              value="{{wechatCode}}"
+              size="large"
+              maxlength="50"
+              placeholder="请输入微信号"
+              border="{{false}}"
+              input-align="right"
+              focus="{{wechatCodeFocus}}"
+              bind:change="onChangeWechatCode"/>
+          </view>
+        </view>
+        <image wx:if="{{!showInfo}}" bindtap="getWechatCodeFocus" class="myself_write" src="{{imageHost}}/images/icons/writing_32px.png"/>
+      </view>
+      <view class='line-text'></view>
+
+      <view class="myself-info-view">
+        <view class="myself-info-label">地区</view>
+        <view class="myself-info-text" wx:if="{{showInfo}}">
+          {{prefecture.province}} {{prefecture.city}}
+        </view>
+        <view class="myself-info-text view-width" wx:if="{{!showInfo}}">
+          <view class="input-right" bindtap="onShowRegionPopup">
+            {{prefecture.province}} <text wx:if="{{showChooseCity}}" class="choose-text">请选择地区</text>{{prefecture.city}}
+          </view>
+        </view>
+        <image wx:if="{{!showInfo}}" bindtap="onShowRegionPopup" class="myself_write" src="{{imageHost}}/images/icons/writing_32px.png"/>
+      </view>
+      <view class='line-text'></view>
+      <view class="myself-info-view">
+        <view class="myself-info-label">生日</view>
+        <view class="myself-info-text" wx:if="{{showInfo}}">
+          {{birthday}}<text wx:if="{{showChooseBirthday}}" class="choose-text">请选择生日</text>
+        </view>
+        <view class="myself-info-text view-width" wx:if="{{!showInfo}}">
+          <view class="input-right" bindtap="onShowDatePopup">
+            {{birthday}}
+          </view>
+        </view>
+        <image wx:if="{{!showInfo}}" bindtap="onShowDatePopup" class="myself_write" src="{{imageHost}}/images/icons/writing_32px.png"/>
+      </view>
+      <view class='line-text'></view>
+      <view class="myself-info-view">
+        <view class="myself-info-label">我的签名</view>
+        <view class="myself-info-text signature-content" wx:if="{{showInfo}}">
+          {{signature}}
+        </view>
+        <view class="myself-info-text view-width" wx:if="{{!showInfo}}">
+          <view style="margin-top:5px;">
+            <van-field
+              value="{{signature}}"
+              type="textarea"
+              size="large"
+              maxlength="100"
+              clearable
+              placeholder="请输入签名"
+              autosize
+              focus="{{signatureFocus}}"
+              input-align="right"
+              bind:change="onChangeSignature"
+              border="{{ false }}"/>
+          </view>
+        </view>
+        <image wx:if="{{!showInfo}}" bindtap="getSignatureFocus" class="myself_write" src="{{imageHost}}/images/icons/writing_32px.png"/>
+      </view>
+
+      <van-popup
+        show="{{showRegionPopup}}"
+        position="bottom"
+        custom-style="height: 35%;"
+        bind:close="onCloseRegionPopup">
+        <van-picker 
+          show-toolbar
+          title="选择地区"
+          columns="{{ columns }}"
+          default-index="{{1}}" 
+          bind:change="onChangePrefecture"
+          bind:cancel="onCancelPrefecture"
+          bind:confirm="onConfirmPrefecture"/>
+      </van-popup>
+
+      <van-popup
+        show="{{showDatePopup}}"
+        position="bottom"
+        custom-style="height: 35%;"
+        bind:close="onCloseDatePopup">
+        <van-datetime-picker
+          type="date"
+          value="{{ currentDate }}"
+          min-date="{{ minDate }}"
+          bind:confirm="onConfirmBirthday"
+          bind:cancel="onCancelBirthday"
+          formatter="{{ formatter }}"/>
+      </van-popup>
+      <!-- bind:input="onInputBirthday" -->
+      <!-- bind:change="onChangePrefecture"  -->
+
+      <!-- <view style="float:left;width:30%;height:50px;text-align:left;">
+        头像
+      </view>
+      <view style="float:left;width:70%;height:50px;text-align:right;">
+        <van-uploader 
+            file-list="{{ fileList }}" 
+            deletable="{{false}}" 
+            preview-size="50px"
+            max-count="2"
+            image-fit="scaleToFill"
+            bind:after-read="afterRead">
+          <view style="font-size:13px;color:#BEBEBE;">替换头像</view>
+        </van-uploader>
+      </view>
+      <view style="float:left;width:100%;height:50px;text-align:left;">
+        <van-cell-group>
+          <van-field
+            value="{{ username }}"
+            clearable
+            label="用户名"
+            placeholder="请输入用户名"
+            bind:click-icon="onClickIcon"/>
+
+          <van-field
+            value="{{ password }}"
+            type="password"
+            label="密码"
+            placeholder="请输入密码"
+            border="{{ false }}"/>
+        </van-cell-group>
+      </view> -->
+    </view>
+  </scroll-view>
+</view>

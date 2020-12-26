@@ -1,0 +1,30 @@
+<view class="container">
+    <text class="login-title">请输入账号密码</text>
+
+    <form style="width: 100%;margin-top: 55px;" bindsubmit="loginFormSubmit">
+        
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell ">
+                <view class="weui-cell__bd">
+                    <input type='text' class="weui-input" name='username' placeholder="请输入手机号" />
+                </view>
+            </view>
+        </view>
+
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell ">
+                <view class="weui-cell__bd">
+                    <input type='password' class="weui-input" name='password' placeholder="请输入账号密码" />
+                </view>
+            </view>
+        </view>
+        
+        <view class="row">
+            <button type="primary" form-type="submit">登录</button>
+        </view>
+        <view style="width:100%;margin-top:22px;" open-type="toUserRegist" bindtap="toUserRegist">
+            <text style="font-size: 16px;">没有账号去</text>
+            <text class="user-regist">注册</text>
+        </view>
+    </form>
+</view>
