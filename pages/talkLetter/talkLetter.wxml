@@ -1,116 +1,88 @@
 <scroll-view scroll-y 
-  scroll-into-view="{{toView}}"
+  scroll-into-view="{{toShowMessageView}}"
   style="height:100vh"
   scroll-with-animation="true"
-  bindscrolltolower="loadMoreReply">
+  bindscrolltoupper="loadMoreHistoryLetter"
+  >
 
   <view class="letter-page">
-    <view class="agree-user">
-      <view class="send-time"><tetx class="send-time-text">12月08日 13:20</tetx></view>
-      <view class="comments_details">
-        <view class="comments_userPic">
-          <image class="comments_user_headpic" src="http://172.20.10.2:8080/portrait/20200906/8a8c88093ead48e8aef6650bb4ba1e0a.png"></image>
-        </view>
-        <view class="comments_detail">
-          <view style="width:100%;">
-            <view class="user_name">手机用户3828</view>
-            <view class="last-word">
-              <view class="letter-content">
-                <text>国内近期出现多点零星病例属正常现象</text>
-              </view>
-            </view>
-          </view>
-        </view>
+    <view style="position:fixed; top:0;width: 750rpx;height:60px;z-index:1;">
+      <view class="weui-loadmore" wx:if="{{loadingmore}}">
+        <view class="weui-loading"></view>
+        <view class="weui-loadmore__tips">正在加载</view>
       </view>
     </view>
 
-    <view class="agree-user">
-      <view class="send-time"><tetx class="send-time-text">12月08日 13:20</tetx></view>
-      <view class="comments_details">
-        <view class="comments_userPic">
-          <image class="comments_user_headpic" src="http://172.20.10.2:8080/portrait/20200906/8a8c88093ead48e8aef6650bb4ba1e0a.png"></image>
-        </view>
-        <view class="comments_detail">
-          <view style="width:100%;">
-            <view class="user_name">手机用户3828</view>
-            <view class="last-word">
-              <view class="letter-content">
-                <text>多点零星的快</text>
+    <view style="z-index:999;">
+      <block wx:for-items="{{lettersList}}" wx:key="id">
+        <view class="agree-user" wx:if="{{item.sendUserId == talkUserId}}">
+          <view class="send-time"><tetx class="send-time-text">{{item.sendTimeFormat}}</tetx></view>
+          <view class="comments_details" id="LetterContent{{item.id}}">
+            <view class="comments_userPic">
+              <image class="comments_user_headpic" src="{{headimageurl}}"></image>
+            </view>
+            <view class="comments_detail">
+              <view style="width:100%;">
+                <view class="user_name">{{nickname}}</view>
+                <view class="last-word">
+                  <view class="letter-content">
+                    <text>{{item.content}}</text>
+                  </view>
+                </view>
               </view>
             </view>
           </view>
         </view>
-      </view>
-    </view>
 
-    <view class="agree-user">
-      <view class="send-time"><tetx class="send-time-text">5小时前</tetx></view>
-      <view class="comments_details">
-        <view class="comments_userPic_logon_user">
-          <image class="comments_user_headpic" src="http://172.20.10.2:8080/portrait/20201206/e098f301408142aab976d204e94dd0ce.png"></image>
-        </view>
-        <view class="comments_detail_logon_user">
-          <view style="width:100%;">
-            <view class="user_name_logon_user">手机用户3828</view>
-            <view class="last-word-logon-user">
-              <view class="letter_content_logon_user">
-                <text>搜索咯偶电话费搜索</text>
+        <view class="agree-user" wx:if="{{item.sendUserId == logonUserId}}">
+          <view class="send-time"><tetx class="send-time-text">{{item.sendTimeFormat}}</tetx></view>
+          <view class="comments_details" id="LetterContent{{item.id}}">
+            <view class="comments_userPic_logon_user">
+              <image class="comments_user_headpic" src="{{logonUserHeadImage}}"></image>
+            </view>
+            <view class="comments_detail_logon_user">
+              <view style="width:100%;">
+                <view class="user_name_logon_user">{{logonUserNickname}}</view>
+                <view class="last-word-logon-user">
+                  <view class="letter_content_logon_user">
+                    <text>{{item.content}}</text>
+                  </view>
+                </view>
               </view>
             </view>
           </view>
         </view>
-      </view>
+      </block>
     </view>
+    <view style="width:100%;height:180px;" id="LetterContent">
+      <text>
 
-    <view class="agree-user">
-      <view class="send-time"><tetx class="send-time-text">5小时前</tetx></view>
-      <view class="comments_details">
-        <view class="comments_userPic_logon_user">
-          <image class="comments_user_headpic" src="http://172.20.10.2:8080/portrait/20201206/e098f301408142aab976d204e94dd0ce.png"></image>
-        </view>
-        <view class="comments_detail_logon_user">
-          <view style="width:100%;">
-            <view class="user_name_logon_user">手机用户3828</view>
-            <view class="last-word-logon-user">
-              <view class="letter_content_logon_user">
-                <text>新京报快讯 阿里巴巴集团今日针对国家市场监管总局对其因涉嫌垄断行为被立案调查一事发布公告一则，公告称，阿里巴巴接到国家市场监管总局通知，依法对阿里巴巴涉嫌垄断行为立案调查。阿里巴巴将积极配合监管部门调查。</text>
-              </view>
-            </view>
-          </view>
-        </view>
-      </view>
+      </text>
     </view>
     
     <view class="page__hd_food">
       <view class="input-mes">
         <van-cell-group>
           <van-field
-            value="{{ value }}"
+            value="{{ letterContent }}"
             type='text'
             size="large"
             placeholder="发送消息"
             border="{{ true }}"
-            maxlength="300"
+            hold-keyboard="{{true}}"
+            maxlength="305"
             custom-style="send-message"
             confirm-type="发送"
             cursor-spacing="100"
-            bind:change="onChange"
+            bind:change="onChangeLetterContent"
           />
         </van-cell-group>
       </view>
-      <view class="mes-send">
+      <view class="mes-send" bindtap="onSendLetter">
         发送
       </view>
+      <van-toast id="van-toast" />
       
     </view>
-
-
-
-    <view style="width:100%;height:80px;">
-      <view class="weui-loadmore" wx:if="{{loadingmore}}">
-        <view class="weui-loading"></view>
-        <view class="weui-loadmore__tips">正在加载</view>
-      </view>
-    </view> 
   </view>
 </scroll-view>

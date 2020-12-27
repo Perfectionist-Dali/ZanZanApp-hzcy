@@ -41,7 +41,7 @@
   border-radius: 35px;
 }
 .user-name{
-  width: 66%;
+  width: 62%;
   float: left;
   position: relative;
   top: 10px;

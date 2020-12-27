@@ -173,6 +173,8 @@ page {
   float: left;
 }
 .mes-send{
+  float: left;
+  width: 20%;
   text-align: center;
   color:#848484;
   height: 60px;

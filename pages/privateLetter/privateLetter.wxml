@@ -16,7 +16,7 @@
     <view style="margin-top:55px;">
       <block wx:for-items="{{letterInitiatList}}" wx:key="id">
         <view class="agree-user">
-          <view class="comments_details" bindtap="onTalkLetter" data-talkuserid="{{item.talkUserId}}" data-initiatid="{{item.id}}" data-headimageurl="{{item.headImageUrl}}" data-nickname="{{item.nickName}}">
+          <view class="comments_details" bindtap="onTalkLetter" data-talkuserid="{{item.talkUserId}}" data-initiatid="{{item.id}}" data-headimageurl="{{item.headImageUrl}}" data-nickname="{{item.nickName}}" data-notreadnums="{{item.notReadNums}}" data-letterindex="{{index}}">
             <view class="comments_userPic">
               <image class="comments_user_headpic" src="{{item.headImageUrl}}"></image>
               <block wx:if="{{item.notReadNums > 0}}">
@@ -36,42 +36,6 @@
           </view>
         </view>
       </block>
-
-<!--       
-      <view class="agree-user">
-        <view class="comments_details" bindtap="onTalkLetter" data-userid="c3bfa9ae9d804a81bf5e9216429c4240">
-          <view class="comments_userPic">
-            <image class="comments_user_headpic" src="http://172.20.10.2:8080/images/header/default_headpic4.png"></image>
-          </view>
-          <view class="comments_detail">
-            <view class="user_name">手机用户3828</view>
-            <view class="last-word">
-              你好哇
-            </view>
-          </view>
-          <view class="letter-time">
-            <text class="letter-time-text">52分钟前</text>
-          </view>
-        </view>
-      </view>
-
-      <view class="agree-user">
-        <view class="comments_details" bindtap="onTalkLetter" data-userid="c3bfa9ae9d804a81bf5e9216429c4240">
-          <view class="comments_userPic">
-            <image class="comments_user_headpic" src="http://172.20.10.2:8080/portrait/20200906/8a8c88093ead48e8aef6650bb4ba1e0a.png"></image>
-          </view>
-          <view class="comments_detail">
-            <view class="user_name">手机用户8000</view>
-            <view class="last-word">
-              亲爱的北境之王
-            </view>
-          </view>
-          <view class="letter-time">
-            <text class="letter-time-text">52分钟前</text>
-          </view>
-        </view>
-      </view> -->
-
 
       <view style="width:100%;height:80px;">
         <view class="weui-loadmore" wx:if="{{loadingmore}}">

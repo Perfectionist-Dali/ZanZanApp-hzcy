@@ -13,7 +13,9 @@ Page({
     userInfoViewHeight:0,
     userInfoViewOpacityHeight:0,
     disabledBtn:false,//关注按钮禁用
-
+    logonUserNickName:"",
+    logonUserHeadImageUrl:"",
+    initiatId:""
   },
 
   /**
@@ -42,7 +44,10 @@ Page({
               self.setData({
                 userInfo:infoData.data.resData,
                 userImageUrl:infoData.data.resData.headImageUrl,
-                fileList:self.data.fileList
+                fileList:self.data.fileList,
+                logonUserNickName:infoData.data.resData.logonUserNickName,
+                logonUserHeadImageUrl:infoData.data.resData.logonHeadImageUrl,
+                initiatId:infoData.data.resData.initiatId
               });
               let userNickName = infoData.data.resData.nickName;
               wx.setNavigationBarTitle({
@@ -85,6 +90,24 @@ Page({
         image: "../../images/error.png"
       })
     };
+  },
+
+  /**
+   * 私信
+   * @param {} e 
+   */
+  onTalkLetter:function(e){
+    var that = this;
+    let initiatId = that.data.initiatId;
+    console.log(that.data.logonUserHeadImageUrl);
+    let talkUserId = e.currentTarget.dataset.talkuserid;
+    let headimageurl = e.currentTarget.dataset.headimageurl;
+    let nickname = e.currentTarget.dataset.nickname;
+    let notreadnums = e.currentTarget.dataset.notreadnums;
+    
+    wx.navigateTo({
+      url: "../talkLetter/talkLetter?initiatId="+initiatId+"&talkUserId="+talkUserId+"&headimageurl="+headimageurl+"&nickname="+nickname+"&notreadnums="+notreadnums+"&logonUserNickname="+that.data.logonUserNickName+"&logonUserHeadImage="+that.data.logonUserHeadImageUrl
+    })
   },
 
   /**

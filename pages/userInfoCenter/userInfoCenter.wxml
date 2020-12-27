@@ -24,15 +24,27 @@
             <view class="user-zzcode-text">赞赞号：{{userInfo.zanCode}}</view>
             <view class="user-zzcode-text">微信号：{{userInfo.wechatCode}}</view>
           </view>
-          <view style="width:32%;height:120px;float: right;text-align:center;">
+          <view style="width:38%;height:120px;float: right;text-align:center;">
             <image src="{{userImageUrl}}" bindtap="previewImage" id="{{userImageUrl}}" data-urls="{{fileList}}" class="user-avatar"></image>
             <block wx:if="{{userInfo.userId != userInfo.loginUserId}}">
-              <block wx:if="{{!userInfo.interestUser}}">
-                <van-button color="#d13d4b" custom-style="font-size:14px;margin-top:14px;" type="primary" size="small" data-operatetype="interest" data-userid="{{userInfo.userId}}" data-isinterest="{{userInfo.isInterest}}" bind:click="opereatInterestUser" disabled="{{disabledBtn}}">+关注</van-button>
-              </block>
-              <block wx:if="{{userInfo.interestUser}}">
-                <van-button color="#d13d4b" custom-style="font-size:14px;margin-top:14px;" type="primary" size="small" data-operatetype="cancelInterest" data-userid="{{userInfo.userId}}" data-isinterest="{{userInfo.isInterest}}" bind:click="opereatInterestUser" disabled="{{disabledBtn}}">取消关注</van-button>
-              </block>
+              <view style="width:100%;">
+                <van-button color="#d13d4b" custom-style="font-size:13px;position:relative;top:14px;" type="primary" size="mini" 
+                data-talkuserid="{{userInfo.userId}}" 
+                data-initiatid="" 
+                data-headimageurl="{{userImageUrl}}" 
+                data-nickname="{{userInfo.nickName}}" 
+                data-notreadnums="0" 
+                bind:click="onTalkLetter">私信</van-button>
+
+
+                <block wx:if="{{!userInfo.interestUser}}">
+                  <van-button color="#d13d4b" custom-style="font-size:13px;position:relative;top:14px;left:10px;" type="primary" size="mini" data-operatetype="interest" data-userid="{{userInfo.userId}}" data-isinterest="{{userInfo.isInterest}}" bind:click="opereatInterestUser" disabled="{{disabledBtn}}">+关注</van-button>
+                </block>
+                <block wx:if="{{userInfo.interestUser}}">
+                  <van-button color="#d13d4b" custom-style="font-size:13px;position:relative;top:14px;left:10px;" type="primary" size="mini" data-operatetype="cancelInterest" data-userid="{{userInfo.userId}}" data-isinterest="{{userInfo.isInterest}}" bind:click="opereatInterestUser" disabled="{{disabledBtn}}">取消关注</van-button>
+                </block>
+              </view>
+              
             </block>
           </view>
         </view>

@@ -64,8 +64,6 @@ Page({
         url
       })
     }
-    //this.onWebSocket(logonUserId);
-    
   },
 
   /**
@@ -292,8 +290,10 @@ Page({
   myLetter:function(e){
     var self = this;
     let userId = e.currentTarget.dataset.userid;
+    let logonUserNickname = self.data.loginUserInfo.nickName;
+    let logonUserHeadImage = self.data.loginUserInfo.headImageUrl;
     wx.navigateTo({
-      url: "../privateLetter/privateLetter?userId="+userId+"&letterNotReadNums="+self.data.letterNotReadNums
+      url: "../privateLetter/privateLetter?userId="+userId+"&letterNotReadNums="+self.data.letterNotReadNums+"&logonUserNickname="+logonUserNickname+"&logonUserHeadImage="+logonUserHeadImage
     })
   },
 

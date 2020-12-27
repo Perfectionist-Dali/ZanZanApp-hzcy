@@ -396,6 +396,11 @@ button::after {
 }
 
 .my_notice_msg{
+  margin-top: -5px;
+  margin-left: 20px;
+}
+
+.my_letter_msg{
   margin-top: -6px;
   margin-left: 18px;
 }

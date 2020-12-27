@@ -185,7 +185,7 @@
         <text style="bottom:2px;left: 13px;">通知</text>
 
         <block wx:if="{{noticeNotReadNums > 0}}">
-          <view class="weui-badge my_notice_msg">{{noticeNotReadNums}}</view>
+          <view class="weui-badge my_letter_msg">{{noticeNotReadNums}}</view>
         </block>
       </view>
       <view class="my_menu" data-userid="{{loginUserInfo.userId}}" bindtap="myLetter">

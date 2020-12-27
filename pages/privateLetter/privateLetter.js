@@ -10,6 +10,8 @@ Page({
     loadingmore:true,//正在加载更多用户
     letterInitiatList:[],//私信列表
     letterNotReadNums:0,
+    logonUserNickname:"",
+    logonUserHeadImage:"",
   },
 
   /**
@@ -21,8 +23,12 @@ Page({
     // let userNickName = options.userNickName;
     // let nums = options.nums;
     let letterNotReadNums = options.letterNotReadNums;
+    let logonUserNickname = options.logonUserNickname;
+    let logonUserHeadImage = options.logonUserHeadImage;
     self.setData({
-      letterNotReadNums:letterNotReadNums
+      letterNotReadNums:letterNotReadNums,
+      logonUserNickname:logonUserNickname,
+      logonUserHeadImage:logonUserHeadImage
     })
     
     //加载私信列表数据
@@ -100,13 +106,15 @@ Page({
    * @param {} e 
    */
   onTalkLetter:function(e){
+    var that = this;
     let initiatId = e.currentTarget.dataset.initiatid;
     let talkUserId = e.currentTarget.dataset.talkuserid;
     let headimageurl = e.currentTarget.dataset.headimageurl;
     let nickname = e.currentTarget.dataset.nickname;
-
+    let notreadnums = e.currentTarget.dataset.notreadnums;
+    let letterindex = e.currentTarget.dataset.letterindex;
     wx.navigateTo({
-      url: "../talkLetter/talkLetter?initiatId="+initiatId+"&talkUserId="+talkUserId+"&headimageurl="+headimageurl+"&nickname="+nickname
+      url: "../talkLetter/talkLetter?initiatId="+initiatId+"&talkUserId="+talkUserId+"&headimageurl="+headimageurl+"&nickname="+nickname+"&notreadnums="+notreadnums+"&letterindex="+letterindex+"&logonUserNickname="+that.data.logonUserNickname+"&logonUserHeadImage="+that.data.logonUserHeadImage
     })
   },
 

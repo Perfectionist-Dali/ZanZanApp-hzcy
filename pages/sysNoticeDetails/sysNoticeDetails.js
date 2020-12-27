@@ -21,11 +21,10 @@ Page({
       noticeInfo:JSON.parse(options.noticeDetails)
     });
     console.log(that.data.noticeInfo.id);
+    //改变通知列表已读状态
     if(that.data.noticeInfo.readTime == 'no-read'){
       that.onReadNoticeInfo(that.data.noticeInfo.id);
     }
-
-    //改变通知列表已读状态
     let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
     let prevPage = pages[pages.length-2];
     prevPage.data.noticeList[noticeIndex].readTime = "";
