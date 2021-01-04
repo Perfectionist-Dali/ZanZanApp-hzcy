@@ -99,7 +99,7 @@
             <view class="operate-icons">
                 <view class="message-operate-info">
                   <view class="click-agree-view">
-                    <button open-type="share" data-dynamicid="{{item.dynamicId}}" data-dynamicindex="{{index}}" data-username="{{item.userNickname}}" data-dynamicuserid="{{item.userId}}" class="share-dynamic-btn">
+                    <button open-type="share" data-dynamicid="{{item.dynamicId}}" data-dynamicindex="{{index}}" data-username="{{item.userNickname}}" data-shareimage="{{item.imgUrls[0]}}" data-dynamicuserid="{{item.userId}}" class="share-dynamic-btn">
                       <text class="share-num-btn">{{item.sendOthersNum>0?item.sendOthersNum:"分享"}}</text>
                       <image class="share-mes" style="width:21px;height:21px;top:11px" src="{{imageHost}}/images/icons/output_64.png"/>
                     </button>
@@ -157,7 +157,8 @@
           <text>我的动态</text>
         </view>
         <block wx:if="{{messageNums > 0}}">
-          <view class="weui-badge my_dynamic_msg" bindtap="showMyMessageInfo" data-userid="{{loginUserInfo.userId}}">{{messageNums}}</view>
+          <!-- bindtap="showMyMessageInfo"  -->
+          <view class="weui-badge my_dynamic_msg" data-userid="{{loginUserInfo.userId}}">{{messageNums}}</view>
         </block>
       </view>
       <!-- <view class="my_menu">
@@ -183,7 +184,6 @@
       <view class="my_menu" data-userid="{{loginUserInfo.userId}}" bindtap="showSysNotice">
         <image class="user_center_icon" style="position:relative;left: 4px;height: 16px;width: 19px;" src="{{imageHost}}/images/icons/notification_58.net.png"></image>
         <text style="bottom:2px;left: 13px;">通知</text>
-
         <block wx:if="{{noticeNotReadNums > 0}}">
           <view class="weui-badge my_letter_msg">{{noticeNotReadNums}}</view>
         </block>

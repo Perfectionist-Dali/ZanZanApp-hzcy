@@ -2,7 +2,7 @@
 const app = getApp();
 var fakeData = require('../../common/zanDynamicInfoData.js');
 var loginData = require('../../common/CheckUserLogin.js');
-var util = require('../../utils/util.js')
+var util = require('../../utils/util.js');
 import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 
@@ -41,6 +41,9 @@ Page({
     dynamicComplaintNums:0,
     seenDynamicTypeList: ['全部', '关注的人', '陌生人'],
     seenDynamicTypeIndex: 0,
+    logonUserNickname:"",
+    logonUserAvatarUrl:"",
+    logonGender:""
   },
 
   /**
@@ -70,9 +73,9 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function (e) {
+    var that = this;
     var logonUserId = wx.getStorageSync('logonUserId');
-    this.onCountMsgNums(logonUserId);
-    this.onWebSocket(logonUserId);
+    that.onCountMsgNums(logonUserId);
   },
 
   // 获取滚动条当前位置
@@ -137,19 +140,23 @@ Page({
       let dynamicIndex = options.target.dataset.dynamicindex;
       let username = options.target.dataset.username;
       let dynamicuserid = options.target.dataset.dynamicuserid;
+      let shareImage = options.target.dataset.shareimage;
+      if(null == shareImage || typeof shareImage == "undefined"){
+        shareImage = that.data.imageHost+"/images/icons/share-image.png";
+      }
       let url = encodeURIComponent("../dynamicDetails/dynamicDetails?dynamicId="+dynamicId+"&dynamicIndex="+dynamicIndex);
       console.log(url);
       that.shareDynamic(dynamicId,dynamicuserid);
       return {
-        title: username+"的动态分享",
+        title:wx.getStorageSync('logonUserNickname')+"分享了『"+username+"』的动态：",
         path:`/pages/zanzan/zanzan?url=${url}`,
+        imageUrl:shareImage,
         success: function(res){
             console.log("onShareAppMessage-success");
             console.log(res);
   　　　　　　// 转发成功之后的回调
   　　　　　　if(res.errMsg == 'shareAppMessage:ok'){
               Toast("转发成功");
-              
   　　　　　　}
   　　　　},
   　　　　fail: function(res){
@@ -168,11 +175,12 @@ Page({
   　　　　　　// 转发结束之后的回调（转发成不成功都会执行）
   　　　　},
       }
-      
     }else{
+      console.log(that.data.imageHost+"/images/icons/share-image.png");
       return {
-        title: "分享赞赞动态",
+        title: wx.getStorageSync('logonUserNickname')+"邀您一起玩赞赞：",
         path:`/pages/zanzan/zanzan`,
+        imageUrl:that.data.imageHost+"/images/icons/share-image.png",
         success: function(res){
             console.log("topShareAppMessage-success");
             console.log(res);
@@ -196,7 +204,18 @@ Page({
   　　　　},
       }
     }
-    
+  },
+
+  /**
+   * 分享到朋友圈
+   * 前提是必须定义了：﻿onShareAppMessage，传参是在query中定义
+   * 这个方法中分享的地址就是当前页面地址，所以不需要指定path
+   */
+  onShareTimeline: function (res) {
+    return {
+      title: wx.getStorageSync('logonUserNickname')+"邀您一起玩赞赞：",
+      query: 'id=12345678'
+    }
   },
 
   /**
@@ -222,26 +241,27 @@ Page({
           if(infoData.data.status == "1" && infoData.data.message == "success"){
             if(null != infoData.data.resData){
               //未读动态消息
-              if(null != infoData.data.resData.messageNums && "" != infoData.data.resData.messageNums){
+              if(null != infoData.data.resData.messageNums && "" != infoData.data.resData.messageNums && '0' != infoData.data.resData.messageNums){
                 that.setData({
                   messageNums:infoData.data.resData.messageNums
                 })
               }
               //未读通知消息
-              if(null != infoData.data.resData.noticeNotReadNums && "" != infoData.data.resData.noticeNotReadNums){
+              if(null != infoData.data.resData.noticeNotReadNums && "" != infoData.data.resData.noticeNotReadNums && '0' != infoData.data.resData.noticeNotReadNums){
                 that.setData({
                   noticeNotReadNums:infoData.data.resData.noticeNotReadNums
                 })
               }
               //未读私信消息
-              if(null != infoData.data.resData.letterNotReadNums && "" != infoData.data.resData.letterNotReadNums){
+              if(null != infoData.data.resData.letterNotReadNums && "" != infoData.data.resData.letterNotReadNums && '0' != infoData.data.resData.letterNotReadNums){
                 that.setData({
                   letterNotReadNums:infoData.data.resData.letterNotReadNums
                 })
               }
               //总未读消息
+              var totalMes = that.data.messageNums+that.data.noticeNotReadNums+that.data.letterNotReadNums;
               that.setData({
-                messageTotalNums:that.data.messageNums+that.data.noticeNotReadNums+that.data.letterNotReadNums
+                messageTotalNums:totalMes
               })
             }
           }else{
@@ -290,8 +310,10 @@ Page({
   myLetter:function(e){
     var self = this;
     let userId = e.currentTarget.dataset.userid;
-    let logonUserNickname = self.data.loginUserInfo.nickName;
-    let logonUserHeadImage = self.data.loginUserInfo.headImageUrl;
+    let logonUserNickname = self.data.logonUserNickname;
+    let logonUserHeadImage = self.data.logonUserAvatarUrl;
+    console.log("====logonUserNickname===="+logonUserNickname);
+    console.log("====logonUserHeadImage===="+logonUserHeadImage);
     wx.navigateTo({
       url: "../privateLetter/privateLetter?userId="+userId+"&letterNotReadNums="+self.data.letterNotReadNums+"&logonUserNickname="+logonUserNickname+"&logonUserHeadImage="+logonUserHeadImage
     })
@@ -326,6 +348,46 @@ Page({
         if(null != jsonObj.messageNums && "" != jsonObj.messageNums){
           that.setData({
             messageNums:jsonObj.messageNums
+          })
+          //总未读消息
+          that.setData({
+            messageTotalNums:Number(that.data.messageNums)+Number(that.data.noticeNotReadNums)+Number(that.data.letterNotReadNums)
+          })
+        }
+      }
+    })
+    wx.onSocketClose(function (res) {
+      console.log('WebSocket连接已关闭！')
+    })
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    var that=this;
+    wx.onSocketOpen(function (res) {
+      console.log('res=='+res)
+      console.log('WebSocket连接已打开！')
+    })
+    wx.onSocketMessage(function (res) {
+      console.log("==messageNums=="+res.data);
+      if(null != res.data && "" != res.data){
+        var jsonObj = JSON.parse(res.data);
+        if(typeof jsonObj.messageNums != "undefined" && null != jsonObj.messageNums && "" != jsonObj.messageNums){
+          that.setData({
+            messageNums:jsonObj.messageNums
+          })
+          //总未读消息
+          that.setData({
+            messageTotalNums:that.data.messageNums+that.data.noticeNotReadNums+that.data.letterNotReadNums
+          })
+        }
+        console.log("======typeof jsonObj===="+typeof jsonObj);
+        if(typeof jsonObj == "object" && typeof jsonObj[0] != "undefined" && typeof jsonObj[0].initiatId != "undefined"){
+          ++that.data.letterNotReadNums
+          that.setData({
+            letterNotReadNums:that.data.letterNotReadNums
           })
           //总未读消息
           that.setData({
@@ -448,12 +510,15 @@ Page({
           'content-type': 'application/json'
         },
         data: {
-          sessionId: wx.getStorageSync('LoginSessionKey')
+          sessionId: wx.getStorageSync('LoginSessionKey'),
+          logonUserId:wx.getStorageSync('logonUserId'),
+          userWebSocketCode:app.globalData.userWebSocketCode
         },
         success: function (loginRes) {
           //解密后的数据
+          console.log("已登录loginRes===");
           console.log(loginRes)
-          if(loginRes.data.status != "0" && loginRes.data.resData != "logon"){
+          if(loginRes.data.status != "0" && loginRes.data.resData.logonStatus != "logon"){
             //获取用户登录信息失败
             wx.removeStorageSync('LoginSessionKey');
             wx.clearStorageSync();
@@ -462,6 +527,12 @@ Page({
             });
           }else{
             console.log("用户已登录");
+            that.setData({
+              logonUserNickname:loginRes.data.resData.logonUserNickname,
+              logonUserAvatarUrl:loginRes.data.resData.logonUserAvatarUrl,
+              logonGender:loginRes.data.resData.logonGender
+            })
+
             var thisTime = util.formatTimeSub5Second(new Date());
             console.log(thisTime);
             that.loadZanZanDynamicInfoList("refresh",thisTime,"");

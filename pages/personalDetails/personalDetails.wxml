@@ -93,11 +93,11 @@
       <view class="myself-info-view">
         <view class="myself-info-label">地区</view>
         <view class="myself-info-text" wx:if="{{showInfo}}">
-          {{prefecture.province}} {{prefecture.city}}
+          {{prefecture.province}} {{prefecture.city}} {{prefecture.county}}
         </view>
         <view class="myself-info-text view-width" wx:if="{{!showInfo}}">
           <view class="input-right" bindtap="onShowRegionPopup">
-            {{prefecture.province}} <text wx:if="{{showChooseCity}}" class="choose-text">请选择地区</text>{{prefecture.city}}
+            {{prefecture.province}} <text wx:if="{{showChooseCity}}" class="choose-text">请选择地区</text>{{prefecture.city}} {{prefecture.county}}
           </view>
         </view>
         <image wx:if="{{!showInfo}}" bindtap="onShowRegionPopup" class="myself_write" src="{{imageHost}}/images/icons/writing_32px.png"/>
@@ -145,14 +145,22 @@
         position="bottom"
         custom-style="height: 35%;"
         bind:close="onCloseRegionPopup">
-        <van-picker 
+        <!-- <van-picker 
           show-toolbar
           title="选择地区"
           columns="{{ columns }}"
           default-index="{{1}}" 
           bind:change="onChangePrefecture"
           bind:cancel="onCancelPrefecture"
-          bind:confirm="onConfirmPrefecture"/>
+          bind:confirm="onConfirmPrefecture"/> -->
+
+          <van-area area-list="{{ areaList }}" value="110101" columns-num="{{ 3 }}" 
+          columns-placeholder="{{ ['请选择', '请选择', '请选择'] }}" 
+          title="选择地区"
+          bind:confirm="onConfirmPrefecture" 
+          bind:change="onChangePrefecture"
+          bind:cancel="onCancelPrefecture"
+          />
       </van-popup>
 
       <van-popup

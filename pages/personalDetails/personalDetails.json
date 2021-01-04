@@ -8,7 +8,8 @@
     "van-radio-group": "../../miniprogram_npm/@vant/weapp/radio-group/index",
     "van-popup": "../../miniprogram_npm/@vant/weapp/popup/index",
     "van-picker": "../../miniprogram_npm/@vant/weapp/picker/index",
-    "van-datetime-picker": "../../miniprogram_npm/@vant/weapp/datetime-picker/index"
+    "van-datetime-picker": "../../miniprogram_npm/@vant/weapp/datetime-picker/index",
+    "van-area": "../../miniprogram_npm/@vant/weapp/area/index"
   },
   "navigationBarTitleText": "个人信息",
   "enablePullDownRefresh": false

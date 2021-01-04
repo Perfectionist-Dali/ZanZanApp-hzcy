@@ -88,6 +88,10 @@ button{
   color: #d13d4b;
   font-weight: bold;
 }
+.zanzan-logo-image{
+  width: 200rpx;
+  height: 106rpx;
+}
 .slogan{
   font-size: 35rpx;
   text-align: center;
@@ -120,5 +124,5 @@ button{
 }
 .slogan-text{
   width: 170px;
-  height: 32px;
+  height: 27px;
 }

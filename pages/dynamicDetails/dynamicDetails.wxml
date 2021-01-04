@@ -63,7 +63,7 @@
       <view class="icon-view">
         <view class="share-icon">
           <!-- <image class="forward-other-icon" src="{{imageHost}}/images/icons/output_64.png"></image> -->
-          <button open-type="share" data-dynamicid="{{dynamicInfo.dynamicId}}" data-dynamicindex="{{dynamicIndex}}" data-username="{{dynamicInfo.userNickname}}" data-dynamicuserid="{{dynamicInfo.userId}}" class="share-dynamic-btn">
+          <button open-type="share" data-dynamicid="{{dynamicInfo.dynamicId}}" data-dynamicindex="{{dynamicIndex}}" data-username="{{dynamicInfo.userNickname}}" data-dynamicuserid="{{dynamicInfo.userId}}" data-shareimage="{{dynamicInfo.imgUrls[0]}}" class="share-dynamic-btn">
             <text class="sendOthersNum">{{dynamicInfo.sendOthersNum}}分享</text>
             <image class="forward-other-icon" src="{{imageHost}}/images/icons/output_64.png"/>
           </button>
@@ -181,12 +181,11 @@
   <view class="weui-demo-dialog {{isWrite ? 'weui-demo-dialog_show' : ''}}">
     <view class="weui-mask" bindtap="closeComplaintDialog"></view>
     <view class="input" style="bottom:{{bottom}}px">
-      <!-- <input value="{{msgContent}}" placeholder='请输入文字内容' bindconfirm="sendMsgConfirm" bindinput='inputTextChange' adjust-position="{{false}}" focus="{{isWrite}}" bindfocus="foucus" bindblur="blur"></input> -->
-      
       <textarea value="{{msgContent}}" wx:if="{{isShowCommentText}}" 
       maxlength="300" bindinput="inputCommentWordChange" 
       class="comment_textarea" bindtouchstart="touchStart" bindtouchend="touchEnd" bindtap="multipleTap"  
         placeholder="{{placeholderWarning}}"
+        confirm-type="send"
         show-confirm-bar="{{false}}"
         adjust-position="{{false}}" 
         hold-keyboard="{{true}}"
@@ -203,7 +202,7 @@
       <view class="comment-word-num">
         <text style="position: relative;right: 28rpx;top: 36rpx;">{{remainLen}}/300</text>
       </view>
-  </view>
+    </view>
 </view>
 
 

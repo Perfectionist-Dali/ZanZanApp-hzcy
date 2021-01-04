@@ -1,10 +1,13 @@
 <!--miniprogram/pages/index/index.wxml-->
 <view class="container">
   <view class="logo-style">
-    <view class="zanzan-logo">赞赞</view>
+    <view class="zanzan-logo">
+      <!-- 赞赞 -->
+      <image class='zanzan-logo-image' src='{{imageHost}}/images/icons/zanzanlogo2.png'></image>
+    </view>
     <view class="slogan">
       <!-- <text>爱生活</text><text style="margin-left:10px;">多点赞</text> -->
-      <image class='slogan-text' src='{{imageHost}}/images/icons/slogan21.png'></image>
+      <image class='slogan-text' src='{{imageHost}}/images/icons/slogan26.png'></image>
     
     </view>
   </view>

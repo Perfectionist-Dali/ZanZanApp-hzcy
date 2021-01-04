@@ -160,7 +160,7 @@ Page({
           success: (resSessionData) => {
             console.log(resSessionData);
             if (resSessionData.data.message == "success" && resSessionData.data.status == "0"){
-              wx.setStorageSync('LoginSessionKey', resSessionData.data.resData.loginSessionKey);         
+              wx.setStorageSync('LoginSessionKey', resSessionData.data.resData.loginSessionKey);
               //userLoginInfo.getWXUserLoginInfo(1);
             }
           }

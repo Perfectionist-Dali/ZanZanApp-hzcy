@@ -19,9 +19,16 @@ Page({
     nickname:"",//对话对象昵称
     notreadnums:0,//未读消息数量
     letterindex:"",//某通私信对话坐标
-    toShowMessageView:'',//显示位置
+    toShowMessageView:"LetterContent",//显示位置
     lettersList:[],//私信聊天列表
     letterContent:"",//发送的私信内容
+    placeholderWarning:"发送消息",//placeholder提示
+  },
+
+  scrollToTop() {
+    this.setAction({
+      scrollTop: 0
+    })
   },
 
   /**
@@ -38,6 +45,8 @@ Page({
     let logonUserId = wx.getStorageSync('logonUserId');
     let logonUserNickname = options.logonUserNickname;
     let logonUserHeadImage = options.logonUserHeadImage;
+    console.log("===logonUserNickname==="+logonUserNickname);
+    console.log("===logonUserHeadImage==="+logonUserHeadImage);
 
     self.setData({
       initiatId:initiatId,
@@ -63,37 +72,51 @@ Page({
     self.loadMoreHistoryLetter(initiatId);
   },
 
-    /**
-   * 创建WebSocket连接
-   */
-  onWebSocket: function (logonUserId) {
+  touchStartTime: 0,   // 触摸开始时间
+  touchEndTime: 0,     // 触摸结束时间
+  lastTapTime: 0,  // 最后一次单击事件点击发生时间
+  lastTapTimeoutFunc: null, // 单击事件点击后要触发的函数
+
+  // 触摸开始
+  touchStart: function(e){
+    this.touchStartTime = e.timeStamp //时间点
+  },
+
+  // 触摸结束
+  touchEnd: function (e) {
+    //注意:触摸结束没有坐标监听事件,故读不到坐标点
+    this.touchEndTime = e.timeStamp //时间点
+  },
+
+  //单击tap或双击tap
+  multipleTap: function(e){
     var that = this;
-    // wx.connectSocket({
-    //   url: app.server.WS_URL+logonUserId,
-    //   success:function(res){
-    //     console.log(res);
-    //     if (res.errMsg == "connectSocket:ok"){
-    //       console.log("开始建立连接！");
-    //     }else{
-    //       console.log("建立连接失败！");
-    //     } 
-    //   },
-    //   fail:function(res){
-    //     console.log(res);
-    //   }
-    // })
-    wx.onSocketOpen(function (res) {
-      console.log('WebSocket连接已打开！')
-    })
-    wx.onSocketMessage(function (res) {
-      console.log("==websocketReceiveLetter=="+res.data);
-      if(null != res.data && "" != res.data){
-        var jsonObj = JSON.parse(res.data);
+    let diffTouch = this.touchEndTime - this.touchStartTime;
+    let curTime = e.timeStamp;
+    let lastTime = this.lastTapDiffTime;
+    this.lastTapDiffTime = curTime;
+    
+      //两次点击间隔小于300ms, 认为是双击
+      let diff = curTime - lastTime;
+      if (diff < 300) {
+        clearTimeout(this.lastTapTimeoutFunc); // 成功触发双击事件时，取消单击事件的执行
         
+      }else {
+        // 单击事件延时300毫秒执行，这和最初的浏览器的点击300ms延时有点像。
+        this.lastTapTimeoutFunc = setTimeout(function () {
+          console.log("single tap")
+        }, 300);
       }
-    })
-    wx.onSocketClose(function (res) {
-      console.log('WebSocket连接已关闭！')
+  },
+
+  /**
+   * 查看会员主页信息
+   */
+  showUserInfo:function (e) {
+    let userId = e.currentTarget.dataset.userid;
+    console.log(userId);
+    wx.navigateTo({ 
+      url: "../userInfoCenter/userInfoCenter?userId="+userId
     })
   },
 
@@ -103,9 +126,10 @@ Page({
    */
   onChangeLetterContent(event) {
     // event.detail 为当前输入的值
+    console.log(event.detail.value);
     var that = this;
     that.setData({
-      letterContent:event.detail
+      letterContent:event.detail.value
     })
   },
 
@@ -272,19 +296,18 @@ Page({
               self.setData({
                 lettersList:infoData.data.resData
               });
-
-              if(self.data.toShowMessageView == ""){
-                self.setData({
-                  toShowMessageView:"LetterContent"+infoData.data.resData.slice(-1)[0].id
-                })
-              }
-
+              // if(self.data.toShowMessageView == ""){
+              //   self.setData({
+              //     toShowMessageView:"LetterContent"+infoData.data.resData.slice(-1)[0].id
+              //   })
+              // }
             }else{
               var tempArray = [];
               tempArray = tempArray.concat(infoData.data.resData).concat(self.data.lettersList);
               console.log(tempArray);
               self.setData({
-                lettersList: tempArray
+                lettersList: tempArray,
+                //toShowMessageView:"LetterContent"+infoData.data.resData.slice(-1)[0].id
               })
             }
           }
@@ -317,30 +340,54 @@ Page({
   },
 
   /**
-   * 查看会员主页信息
-  */
-  showUserInfo:function (e) {
-    let userId = e.currentTarget.dataset.userid;
-    console.log(userId);
-    wx.navigateTo({ 
-      url: "../userInfoCenter/userInfoCenter?userId="+userId
-    })
-  },
-
-  /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    var self = this;
-    var logonUserId = wx.getStorageSync('logonUserId');
-    this.onWebSocket(logonUserId);
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that=this;
+    wx.onSocketOpen(function (res) {
+      console.log('res=='+res)
+      console.log('WebSocket连接已打开！')
+    })
+    wx.onSocketMessage(function (res) {
+      console.log("==talkContent=="+res.data);
+      if(null != res.data && "" != res.data){
+        var justTalkObj = JSON.parse(res.data);
+        console.log(justTalkObj);
+        if(null == that.data.lettersList || that.data.lettersList.length == 0 ){
+          that.setData({
+            lettersList:justTalkObj
+          });
 
+          if(that.data.toShowMessageView == ""){
+            that.setData({
+              toShowMessageView:"LetterContent"+justTalkObj[0].id
+            })
+          }
+        }else{
+          var tempArray = [];
+          tempArray = tempArray.concat(that.data.lettersList).concat(justTalkObj);
+          console.log(tempArray);
+          that.setData({
+            lettersList: tempArray
+          })
+          that.setData({
+            toShowMessageView:"LetterContent"+justTalkObj[0].id
+          })
+        }
+        //置为已读
+        that.messageIsRead(justTalkObj[0].initiatId,that.data.logonUserId);
+      }
+    })
+    wx.onSocketClose(function (res) {
+      console.log('WebSocket连接已关闭！')
+    })
   },
 
   /**

@@ -354,12 +354,17 @@ Page({
       let dynamicIndex = options.target.dataset.dynamicindex;
       let username = options.target.dataset.username;
       let dynamicuserid = options.target.dataset.dynamicuserid;
+      let shareImage = options.target.dataset.shareimage;
+      if(null == shareImage || typeof shareImage == "undefined"){
+        shareImage = that.data.imageHost+"/images/icons/share-image.png";
+      }
       let url = encodeURIComponent("../dynamicDetails/dynamicDetails?dynamicId="+dynamicId+"&dynamicIndex="+dynamicIndex);
       console.log(url);
       that.shareDynamic(dynamicId,dynamicuserid,dynamicIndex);
       return {
-        title: username+"的动态分享",
+        title:wx.getStorageSync('logonUserNickname')+"分享了『"+username+"』的动态：",
         path:`/pages/zanzan/zanzan?url=${url}`,
+        imageUrl:shareImage,
         success: function(res){
             console.log("onShareAppMessage-success");
             console.log(res);
@@ -388,8 +393,9 @@ Page({
       
     }else{
       return {
-        title: "分享赞赞动态",
+        title: wx.getStorageSync('logonUserNickname')+"邀您一起玩赞赞：",
         path:`/pages/zanzan/zanzan`,
+        imageUrl:that.data.imageHost+"/images/icons/share-image.png",
         success: function(res){
             console.log("topShareAppMessage-success");
             console.log(res);
@@ -412,6 +418,18 @@ Page({
   　　　　　　// 转发结束之后的回调（转发成不成功都会执行）
   　　　　},
       }
+    }
+  },
+
+  /**
+   * 分享到朋友圈
+   * 前提是必须定义了：﻿onShareAppMessage，传参是在query中定义
+   * 这个方法中分享的地址就是当前页面地址，所以不需要指定path
+   */
+  onShareTimeline: function (res) {
+    return {
+      title: wx.getStorageSync('logonUserNickname')+"邀您一起玩赞赞：",
+      query: 'id=12345678'
     }
   },
 

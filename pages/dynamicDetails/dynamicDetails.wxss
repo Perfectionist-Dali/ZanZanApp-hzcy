@@ -658,18 +658,15 @@ button::after {
   overflow: hidden;
 }
 .comment_submit{
-  width:21%;
-  position: absolute;
-  height: 51px;
-  line-height: 51px;
+  width:18%;
+  float: left;
+  height: 60px;
   text-align: center;
   font-size: 32rpx;
   font-weight: bold;
   color: #d13d4b;
-  margin-top: 20rpx;
-  right:0;
-  top:0;
-  bottom:0;
+  position: relative;
+  top: 5px;
 }
 .noWord-color{
   color: #fab2ba !important;
@@ -706,6 +703,7 @@ button::after {
   top:-1px;
 }
 .comment_textarea{
+  float: left;
   text-align:left;
   width:80%;
   height:90%;

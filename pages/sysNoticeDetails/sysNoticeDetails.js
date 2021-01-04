@@ -38,7 +38,7 @@ Page({
       --rePrevPage.data.noticeNotReadNums;
       rePrevPage.setData({
         noticeNotReadNums:rePrevPage.data.noticeNotReadNums,
-        messageTotalNums:rePrevPage.data.messageNums+rePrevPage.data.noticeNotReadNums
+        messageTotalNums:rePrevPage.data.messageNums+rePrevPage.data.noticeNotReadNums+rePrevPage.data.letterNotReadNums
       })
     }
   },

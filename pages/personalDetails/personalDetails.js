@@ -32,7 +32,28 @@ Page({
         defaultIndex: 2
       }
     ],
-    prefecture:{province: '', city: '' },//地区
+    areaList:{
+      province_list: {
+        110000: '北京市',
+        120000: '天津市'
+      },
+      city_list: {
+        110100: '北京市',
+        120100: '天津市'
+      },
+      county_list: {
+        110101: '东城区',
+        110102: '西城区',
+        110105: '朝阳区',
+        110106: '丰台区',
+        120101: '和平区',
+        120102: '河东区',
+        120103: '河西区',
+        120104: '南开区',
+        120105: '河北区'
+      }
+    },
+    prefecture:{provinceCode: '',province: '', cityCode: '',city: '',countyCode: '', county: '' },//地区
     birthday:"",//生日
     showRegionPopup: false,//打开选择地区窗
     showDatePopup:false,//打开选择日期窗
@@ -91,13 +112,22 @@ Page({
             if(null != infoData.data.resData){
               self.data.fileList[0] = infoData.data.resData.headImageUrl;
               self.data.prefecture.province = infoData.data.resData.province;
+              self.data.prefecture.provinceCode = infoData.data.resData.provinceCode;
               self.data.prefecture.city = infoData.data.resData.city;
+              self.data.prefecture.cityCode = infoData.data.resData.cityCode;
+              self.data.prefecture.county = infoData.data.resData.county;
+              self.data.prefecture.countyCode = infoData.data.resData.countyCode;
               if(null != self.data.prefecture.province && "" != self.data.prefecture.province){
                 self.setData({
                   showChooseCity:false
                 })
               }
               if(null != self.data.prefecture.city && "" != self.data.prefecture.city){
+                self.setData({
+                  showChooseCity:false
+                })
+              }
+              if(null != self.data.prefecture.county && "" != self.data.prefecture.county){
                 self.setData({
                   showChooseCity:false
                 })
@@ -201,8 +231,12 @@ Page({
           'gender': that.data.gender,
           'nickname':that.data.nickname,
           'wechatCode':that.data.wechatCode,
+          'provinceCode':that.data.prefecture.provinceCode,
           'province':that.data.prefecture.province,
+          'cityCode':that.data.prefecture.cityCode,
           'city':that.data.prefecture.city,
+          'countyCode':that.data.prefecture.countyCode,
+          'county':that.data.prefecture.county,
           'birthday':that.data.birthday,
           'signature':that.data.signature
         },
@@ -262,8 +296,12 @@ Page({
           'gender': that.data.gender,
           'nickname':that.data.nickname,
           'wechatCode':that.data.wechatCode,
+          'provinceCode':that.data.prefecture.provinceCode,
           'province':that.data.prefecture.province,
+          'cityCode':that.data.prefecture.cityCode,
           'city':that.data.prefecture.city,
+          'countyCode':that.data.prefecture.countyCode,
+          'county':that.data.prefecture.county,
           'birthday':that.data.birthday,
           'signature':that.data.signature
         },
@@ -394,11 +432,16 @@ Page({
    * @param {} event 
    */
   onChangePrefecture(event) {
-    const { picker, value, index } = event.detail;
-    console.log(event.detail);
-    picker.setColumnValues(1, citys[value[0]]);
-    this.data.prefecture.province = event.detail.value[0];
-    this.data.prefecture.city = event.detail.value[1];
+    this.data.prefecture.provinceCode = event.detail.values[0].code;
+    this.data.prefecture.province = event.detail.values[0].name;
+    if(typeof event.detail.values[1] != "undefined"){
+      this.data.prefecture.cityCode = event.detail.values[1].code;
+      this.data.prefecture.city = event.detail.values[1].name;
+    }
+    if(typeof event.detail.values[2] != "undefined"){
+      this.data.prefecture.countyCode = event.detail.values[2].code;
+      this.data.prefecture.county = event.detail.values[2].name;
+    }
     this.setData({ 
       prefecture:this.data.prefecture,
       disabledBtn:false
@@ -409,10 +452,17 @@ Page({
    * @param {} event 
    */
   onConfirmPrefecture(event) {
-    const {value, index } = event.detail;
     console.log(event.detail);
-    this.data.prefecture.province = event.detail.value[0];
-    this.data.prefecture.city = event.detail.value[1];
+    this.data.prefecture.provinceCode = event.detail.values[0].code;
+    this.data.prefecture.province = event.detail.values[0].name;
+    if(typeof event.detail.values[1] != "undefined"){
+      this.data.prefecture.cityCode = event.detail.values[1].code;
+      this.data.prefecture.city = event.detail.values[1].name;
+    }
+    if(typeof event.detail.values[2] != "undefined"){
+      this.data.prefecture.countyCode = event.detail.values[2].code;
+      this.data.prefecture.county = event.detail.values[2].name;
+    }
     this.setData({ 
       prefecture:this.data.prefecture,
       showChooseCity:false,

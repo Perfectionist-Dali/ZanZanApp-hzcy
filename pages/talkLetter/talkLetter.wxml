@@ -1,24 +1,28 @@
 <scroll-view scroll-y 
   scroll-into-view="{{toShowMessageView}}"
   style="height:100vh"
-  scroll-with-animation="true"
+  scroll-with-animation="{{true}}"
+  scroll-anchoring="{{true}}"
+  enhanced="{{true}}"
+  fast-deceleration="{{true}}"
+  upper-threshold="100"
   bindscrolltoupper="loadMoreHistoryLetter"
   >
 
   <view class="letter-page">
-    <view style="position:fixed; top:0;width: 750rpx;height:60px;z-index:1;">
+    <view style="position:fixed; top:0;width: 750rpx;height:50px;z-index:1;">
       <view class="weui-loadmore" wx:if="{{loadingmore}}">
         <view class="weui-loading"></view>
         <view class="weui-loadmore__tips">正在加载</view>
       </view>
     </view>
 
-    <view style="z-index:999;">
+    <view style="z-index:999;margin-top:50px;">
       <block wx:for-items="{{lettersList}}" wx:key="id">
         <view class="agree-user" wx:if="{{item.sendUserId == talkUserId}}">
           <view class="send-time"><tetx class="send-time-text">{{item.sendTimeFormat}}</tetx></view>
           <view class="comments_details" id="LetterContent{{item.id}}">
-            <view class="comments_userPic">
+            <view class="comments_userPic" bindtap="showUserInfo" data-userid="{{talkUserId}}">
               <image class="comments_user_headpic" src="{{headimageurl}}"></image>
             </view>
             <view class="comments_detail">
@@ -37,7 +41,7 @@
         <view class="agree-user" wx:if="{{item.sendUserId == logonUserId}}">
           <view class="send-time"><tetx class="send-time-text">{{item.sendTimeFormat}}</tetx></view>
           <view class="comments_details" id="LetterContent{{item.id}}">
-            <view class="comments_userPic_logon_user">
+            <view class="comments_userPic_logon_user" bindtap="showUserInfo" data-userid="{{logonUserId}}">
               <image class="comments_user_headpic" src="{{logonUserHeadImage}}"></image>
             </view>
             <view class="comments_detail_logon_user">
@@ -53,27 +57,30 @@
           </view>
         </view>
       </block>
-    </view>
-    <view style="width:100%;height:180px;" id="LetterContent">
-      <text>
-
-      </text>
+      <view style="width:100%;height:280rpx;" id="LetterContent">
+        <text>
+        </text>
+      </view>
+      <view style="width:100%;height:280rpx;">
+        <text>
+        </text>
+      </view>
     </view>
     
-    <view class="page__hd_food">
+    <!-- <view class="page__hd_food">
       <view class="input-mes">
         <van-cell-group>
           <van-field
             value="{{ letterContent }}"
-            type='text'
+            type='textarea'
             size="large"
             placeholder="发送消息"
             border="{{ true }}"
-            hold-keyboard="{{true}}"
             maxlength="305"
             custom-style="send-message"
             confirm-type="发送"
-            cursor-spacing="100"
+            hold-keyboard="{{true}}"
+            cursor-spacing="50"
             bind:change="onChangeLetterContent"
           />
         </van-cell-group>
@@ -81,8 +88,25 @@
       <view class="mes-send" bindtap="onSendLetter">
         发送
       </view>
-      <van-toast id="van-toast" />
-      
+    </view> -->
+    <view class="page__hd_food" id="sendLetterInput">
+      <textarea value="{{letterContent}}"  
+      maxlength="300" bindinput="onChangeLetterContent" 
+      class="comment_textarea" 
+        placeholder="{{placeholderWarning}}"
+        confirm-type="send"
+        show-confirm-bar="{{false}}"
+        adjust-position="{{true}}" 
+        hold-keyboard="{{true}}"
+        cursor-spacing="200"
+        fixed="{{true}}"
+        focus="{{false}}"
+        >
+      </textarea>
+      <view class="comment_submit" bindtap="onSendLetter">
+        <text class="mes-send-new">发送</text>
+      </view>
     </view>
+    <van-toast id="van-toast" />
   </view>
 </scroll-view>

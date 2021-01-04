@@ -85,8 +85,8 @@ Page({
     });
   },
 
-    /**
-   * 动态详情
+  /**
+   * 动态信息详情
    * @param {} e 
    */
   showDynamicDetails: function (e) {
@@ -116,18 +116,19 @@ Page({
             msgList:that.data.msgList
           })
           let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
-          let prevPage = pages[0];
-          prevPage.data.messageNums = prevPage.data.messageNums - msgnum;
+          let prevPage = pages[pages.length-2];
+          prevPage.data.dynamicNoticeNum = prevPage.data.dynamicNoticeNum - msgnum;
           prevPage.setData({
-            messageNums:prevPage.data.messageNums
+            dynamicNoticeNum:prevPage.data.dynamicNoticeNum
           });
 
           let dynamic_pages = getCurrentPages();
-          let selfDynamicPage = dynamic_pages[dynamic_pages.length-2];
-          if(typeof(selfDynamicPage.data.dynamicNoticeNum) != "undefined"){
-            selfDynamicPage.data.dynamicNoticeNum = selfDynamicPage.data.dynamicNoticeNum - msgnum;
+          let selfDynamicPage = dynamic_pages[dynamic_pages.length-3];
+          if(typeof(selfDynamicPage.data.messageNums) != "undefined"){
+            selfDynamicPage.data.messageNums = selfDynamicPage.data.messageNums - msgnum;
             selfDynamicPage.setData({
-              dynamicNoticeNum:selfDynamicPage.data.dynamicNoticeNum
+              messageNums:selfDynamicPage.data.messageNums,
+              messageTotalNums:selfDynamicPage.data.messageNums+selfDynamicPage.data.noticeNotReadNums+selfDynamicPage.data.letterNotReadNums
             });
           }
           
