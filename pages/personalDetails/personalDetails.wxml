@@ -92,12 +92,12 @@
 
       <view class="myself-info-view">
         <view class="myself-info-label">地区</view>
-        <view class="myself-info-text" wx:if="{{showInfo}}">
-          {{prefecture.province}} {{prefecture.city}} {{prefecture.county}}
+        <view class="myself-info-text" style="font-size:{{regionFontSize}}px;" wx:if="{{showInfo}}">
+         {{prefecture.city}} {{prefecture.county}}
         </view>
         <view class="myself-info-text view-width" wx:if="{{!showInfo}}">
           <view class="input-right" bindtap="onShowRegionPopup">
-            {{prefecture.province}} <text wx:if="{{showChooseCity}}" class="choose-text">请选择地区</text>{{prefecture.city}} {{prefecture.county}}
+          <text wx:if="{{showChooseCity}}" class="choose-text">请选择地区</text>{{prefecture.city}} {{prefecture.county}}
           </view>
         </view>
         <image wx:if="{{!showInfo}}" bindtap="onShowRegionPopup" class="myself_write" src="{{imageHost}}/images/icons/writing_32px.png"/>
@@ -154,7 +154,7 @@
           bind:cancel="onCancelPrefecture"
           bind:confirm="onConfirmPrefecture"/> -->
 
-          <van-area area-list="{{ areaList }}" value="110101" columns-num="{{ 3 }}" 
+          <van-area area-list="{{ areaList }}" value="{{prefecture.countyCode}}" columns-num="{{ 3 }}" 
           columns-placeholder="{{ ['请选择', '请选择', '请选择'] }}" 
           title="选择地区"
           bind:confirm="onConfirmPrefecture" 

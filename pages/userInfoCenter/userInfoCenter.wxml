@@ -18,9 +18,8 @@
                 <image class="user_center_gender" src="{{imageHost}}/images/icons/female.png"></image>
                 <text class="user_center_gender_female">女</text>
               </block>
-
             </view>
-            <view class="city-area">{{userInfo.province}} {{userInfo.city}}</view>
+            <view class="city-area">{{userInfo.city}} {{userInfo.county}}</view>
             <view class="user-zzcode-text">赞赞号：{{userInfo.zanCode}}</view>
             <view class="user-zzcode-text">微信号：{{userInfo.wechatCode}}</view>
           </view>

@@ -1,5 +1,6 @@
 const app = getApp();
 var util = require('../../utils/util.js');
+var region = require('../../utils/region.js');
 
 const citys = {
   '浙江': ['杭州', '宁波', '温州', '嘉兴', '湖州'],
@@ -33,25 +34,9 @@ Page({
       }
     ],
     areaList:{
-      province_list: {
-        110000: '北京市',
-        120000: '天津市'
-      },
-      city_list: {
-        110100: '北京市',
-        120100: '天津市'
-      },
-      county_list: {
-        110101: '东城区',
-        110102: '西城区',
-        110105: '朝阳区',
-        110106: '丰台区',
-        120101: '和平区',
-        120102: '河东区',
-        120103: '河西区',
-        120104: '南开区',
-        120105: '河北区'
-      }
+      province_list:region.province_list,
+      city_list: region.city_list,
+      county_list: region.county_list
     },
     prefecture:{provinceCode: '',province: '', cityCode: '',city: '',countyCode: '', county: '' },//地区
     birthday:"",//生日
@@ -74,7 +59,8 @@ Page({
     showChooseCity:true,
     showChooseBirthday:true,
     loginUserInfo:[],
-    updateUserInfoFlag:""
+    updateUserInfoFlag:"",
+    regionFontSize:16
   },
 
     /**
@@ -131,6 +117,9 @@ Page({
                 self.setData({
                   showChooseCity:false
                 })
+              }else{
+                //自动获取地区
+
               }
               if(null != infoData.data.resData.birthday && "" != infoData.data.resData.birthday){
                 console.log("======showChooseBirthday"+infoData.data.resData.birthday);
@@ -172,6 +161,7 @@ Page({
               showInfo:false,
               disabledBtn:false
             })
+            self.regionFontSize();
           }
         },
         fail: function (failRes) {
@@ -603,6 +593,39 @@ Page({
     })
   },
 
+    /**
+   * 修改地区显示文字大小
+   * @param {*} e 
+   */
+  regionFontSize(){
+    var self = this;
+    let sreenWidth = wx.getSystemInfoSync().windowWidth;
+    console.log(sreenWidth);
+    let regionStr = this.data.city+" "+this.data.region;
+    console.log(regionStr);
+    if(sreenWidth <= 350){
+      if(regionStr.length >= 6 && regionStr.length <= 8){
+        self.setData({
+          regionFontSize:13
+        })
+      }else if(regionStr.length > 8){
+        self.setData({
+          regionFontSize:8
+        })
+      }
+    }else if(sreenWidth > 350){
+      if(regionStr.length >= 6 && regionStr.length <= 8){
+        self.setData({
+          regionFontSize:16
+        })
+      }else if(regionStr.length > 8){
+        self.setData({
+          regionFontSize:13
+        })
+      }
+    }
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -614,7 +637,126 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var self = this;
+    console.log("=====city====="+self.data.prefecture.city);
+    if(null == self.data.prefecture.city || "" == self.data.prefecture.city){
+      this._getUserLocation();
+    }
+  },
 
+  _getUserLocation () {
+    var self = this
+    wx.getSetting({
+      success: (res) => {
+        console.log('用户授权情况', res)
+        //未授权
+        if(res.authSetting['scope.userLocation'] !== undefined &&     
+         res.authSetting['scope.userLocation'] !== true) {
+          wx.showModal({
+            title: '请求授权当前位置',
+            content: '需要获取您的地理位置，请确认授权',
+            success: function (res) {
+              console.log(res)
+              if(res.cancel){
+                wx.showToast({
+                  title: '拒绝授权',
+                  icon: 'none',
+                  duration: 1000
+                })
+              } else if (res.confirm) { //确认授权， 通过wx.openSetting发起授权请求
+                wx.openSetting({
+                  success: function (res) {
+                    if(res.authSetting["scope.userLocation"] == true) {
+                      wx.showModal({
+                        title: '授权成功',
+                        icon: 'success',
+                        duration: 1000
+                      })
+                      console.log("=====city====="+self.data.prefecture.city);
+                      if(null == self.data.prefecture.city || "" == self.data.prefecture.city){
+                        self._getCityLocation();
+                      }
+                    } else {
+                      wx.showModal({
+                        title: '授权失败',
+                        icon: 'none',
+                        duration: 1000
+                      })
+                    }
+                  }
+                })
+              }
+            }
+          })
+        } else if (res.authSetting['scope.userLocation'] == undefined) {
+          console.log("=====city====="+self.data.prefecture.city);
+          if(null == self.data.prefecture.city || "" == self.data.prefecture.city){
+            self._getCityLocation();
+          }
+          console.log('这个为undefined')
+        } else {
+          console.log('授权成功')
+          console.log("=====city====="+self.data.prefecture.city);
+          if(null == self.data.prefecture.city || "" == self.data.prefecture.city){
+            self._getCityLocation();
+          }
+        }
+      }
+    })
+  },
+
+  
+  _getCityLocation(){
+    let self = this
+    wx.getLocation({
+      type: 'wgx84',
+      success: (res) => {
+        let latitude = res.latitude
+        let longitude = res.longitude
+        let speed = res.speed
+        console.log('https://api.map.baidu.com/geocoder/v2/?ak=Vh0ALNzHjjEm5RP0Ie16dlBhZbdEQip9&location=' + res.latitude + ',' + res.longitude + '&output=json');
+
+        wx.request({
+          method: "GET",
+          url: app.server.hostUrl + '/userInfo/getAdressCity',
+          data: {
+            latitude: res.latitude,
+            longitude: res.longitude
+          },
+          header: {
+            'content-type': 'application/json' // 默认值
+          },
+          success: (resSessionData) => {
+            console.log(resSessionData);
+            if (resSessionData.statusCode == 200 && resSessionData.data.status == "0"){
+              self.data.prefecture.province=resSessionData.data.resData.province,
+              self.data.prefecture.city=resSessionData.data.resData.city,
+              self.data.prefecture.county=resSessionData.data.resData.region,
+              self.data.prefecture.countyCode=resSessionData.data.resData.regionCode
+              self.setData({
+                prefecture:self.data.prefecture
+              })
+            }
+          },
+          fail: function (resq) {
+            wx.showModal({
+              title: '信息提示',
+              content: '请求失败',
+              showCancel: false,
+              confirmColor: '#f37938'
+            });
+          }
+        });
+      },
+      fail: (res) => {
+        wx.showModal({
+          title: '信息提示',
+          content: '请求失败',
+          showCancel: false,
+          comfirmColor: '#f37938'
+        })
+      }
+    })
   },
 
   /**
