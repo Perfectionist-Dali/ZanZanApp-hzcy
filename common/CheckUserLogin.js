@@ -14,12 +14,13 @@ var loginData = {
           'content-type': 'application/json'
         },
         data: {
-          sessionId: wx.getStorageSync('LoginSessionKey')
+          sessionId: wx.getStorageSync('LoginSessionKey'),
+          logonUserId:wx.getStorageSync('logonUserId')
         },
         success: function (loginRes) {
           //解密后的数据
           console.log(loginRes)
-          if(loginRes.data.status != "0" && loginRes.data.resData != "logon"){
+          if(loginRes.data.status != "0" && loginRes.data.resData.logonStatus != "logon"){
             //获取用户登录信息失败
             wx.removeStorageSync('LoginSessionKey');
             wx.reLaunch({
@@ -27,6 +28,11 @@ var loginData = {
             });
           }else{
             console.log("用户已登录");
+            if(typeof loginRes.data.resData.logonUserNickname == "undefined" || loginRes.data.resData.logonUserNickname == ""){
+              wx.reLaunch({
+                url: "../userInfoSupply/userInfoSupply"
+              });
+            }
           }
         },
         fail: function () {

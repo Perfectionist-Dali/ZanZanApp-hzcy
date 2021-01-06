@@ -1,3 +1,4 @@
+var util = require('./utils/util.js');
 App({
   globalData: {
     userInfo: null,
@@ -5,6 +6,7 @@ App({
     openid: '', //用户openid
     userId: '', //用户编号
     updateUserFlag:"",//修改个人信息变量
+    userWebSocketCode:""
   },
 
   server: {
@@ -29,7 +31,39 @@ App({
     //     traceUser: true,
     //   })
     // }
-    this.globalData = {}
+
+    var timestamp = Date.parse(new Date());  
+    timestamp = timestamp / 1000;
+    console.log("WS"+timestamp+"_"+util.create_uuid());
+
+    that.globalData.userWebSocketCode = "WS"+timestamp+"_"+util.create_uuid();
+    console.log("======that.server.WS_URL+userWebSocketCode===="+that.server.WS_URL+that.globalData.userWebSocketCode);
+
+    wx.connectSocket({
+      url: that.server.WS_URL+that.globalData.userWebSocketCode,
+      success:function(res){
+        console.log(res);
+        if (res.errMsg == "connectSocket:ok"){
+          console.log("开始建立连接！");
+        }else{
+          console.log("建立连接失败！");
+        } 
+      },
+      fail:function(res){
+        console.log(res);
+      }
+    });
+    wx.onSocketClose(function (res) {
+      console.log('WebSocket连接已关闭！')
+      wx.connectSocket({
+        url: that.server.WS_URL+that.globalData.userWebSocketCode,
+      })
+    });
+    wx.onSocketOpen(function (res) {
+      console.log('res=='+res)
+      console.log('WebSocket连接已打开！')
+    })
+
   },
   /**
    * 生命周期函数--监听页面加载
@@ -37,4 +71,6 @@ App({
   onLoad: function() {
     console.log("-------------------------------------------------------");
   }
+
+  
 })

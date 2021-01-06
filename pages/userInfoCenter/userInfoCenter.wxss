@@ -72,6 +72,13 @@
   color:#ffff;
   margin-top: 5px;
 }
+.user-wechetcode-text{
+  width:100%;
+  text-align:left;
+  font-size:15px;
+  color:#ffff;
+  margin-top: 10px;
+}
 .user-gender{
   width:100%;
   text-align:left;
@@ -171,4 +178,10 @@
   bottom: 3px;
   font-size: 11px;
   color:#DE70B9;
+}
+.copy_text{
+  position: relative;
+  top: 4px;
+  width: 17px;
+  height: 16px;
 }

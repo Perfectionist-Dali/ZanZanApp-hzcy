@@ -26,7 +26,7 @@
   font-size:16px;
   color:#3C3C3C;
   font-weight: bold;
-  line-height: 50px;
+  line-height: 56px;
 }
 .header-pic-view{
   height:60px;
@@ -39,7 +39,7 @@
   float:left;
   width:68%;
   text-align:right;
-  line-height: 50px;
+  line-height: 56px;
   color:#6C6C6C;
 }
 .view-width{
@@ -76,6 +76,12 @@
   margin-top:16px;
   width: 15px;
   height: 15px;
+}
+.copy_text{
+  position: relative;
+  top: 2px;
+  width: 16px;
+  height: 16px;
 }
 .input-right{
   margin-right: 18px;

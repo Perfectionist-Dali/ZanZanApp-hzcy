@@ -71,7 +71,7 @@
 .login-title{
   height: 42px;
   float: left;
-  margin-bottom: 20px;
+  margin-bottom: 100rpx;
   font-size: 38rpx;
   width: 98%;
   border-bottom: 1px solid #D8D8D8;

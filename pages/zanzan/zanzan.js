@@ -148,7 +148,8 @@ Page({
       console.log(url);
       that.shareDynamic(dynamicId,dynamicuserid);
       return {
-        title:wx.getStorageSync('logonUserNickname')+"分享了『"+username+"』的动态：",
+        //title:wx.getStorageSync('logonUserNickname')+"分享了『"+username+"』的动态：",
+        title:"『"+username+"』的动态：",
         path:`/pages/zanzan/zanzan?url=${url}`,
         imageUrl:shareImage,
         success: function(res){
@@ -516,7 +517,7 @@ Page({
         },
         success: function (loginRes) {
           //解密后的数据
-          console.log("已登录loginRes===");
+          console.log("登录loginRes===");
           console.log(loginRes)
           if(loginRes.data.status != "0" && loginRes.data.resData.logonStatus != "logon"){
             //获取用户登录信息失败
@@ -526,16 +527,22 @@ Page({
               url: "../index/index"
             });
           }else{
-            console.log("用户已登录");
-            that.setData({
-              logonUserNickname:loginRes.data.resData.logonUserNickname,
-              logonUserAvatarUrl:loginRes.data.resData.logonUserAvatarUrl,
-              logonGender:loginRes.data.resData.logonGender
-            })
+            if(typeof loginRes.data.resData.logonUserNickname == "undefined" || loginRes.data.resData.logonUserNickname == ""){
+              wx.reLaunch({
+                url: "/pages/userInfoSupply/userInfoSupply"
+              });
+            }else{
+              console.log("用户已登录");
+              that.setData({
+                logonUserNickname:loginRes.data.resData.logonUserNickname,
+                logonUserAvatarUrl:loginRes.data.resData.logonUserAvatarUrl,
+                logonGender:loginRes.data.resData.logonGender
+              })
 
-            var thisTime = util.formatTimeSub5Second(new Date());
-            console.log(thisTime);
-            that.loadZanZanDynamicInfoList("refresh",thisTime,"");
+              var thisTime = util.formatTimeSub5Second(new Date());
+              console.log(thisTime);
+              that.loadZanZanDynamicInfoList("refresh",thisTime,"");
+            }
           }
         },
         fail: function () {

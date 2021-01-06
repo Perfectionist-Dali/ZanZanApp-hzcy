@@ -216,6 +216,34 @@ Page({
     })
   },
 
+  //点击一键复制
+  onCopyZanCode: function (e) {
+    var that = this;
+    wx.setClipboardData({
+      //准备复制的数据内容
+      data: that.data.userInfo.zanCode,
+      success: function (res) {
+        wx.showToast({
+          title: '已复制赞赞号',
+        });
+      }
+    });
+  },
+
+  //点击一键复制
+  onCopyWechatCode: function (e) {
+    var that = this;
+    wx.setClipboardData({
+      //准备复制的数据内容
+      data: that.data.userInfo.wechatCode,
+      success: function (res) {
+        wx.showToast({
+          title: '已复制微信号',
+        });
+      }
+    });
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -391,6 +391,26 @@ Page({
   },
 
   /**
+   * 复制私信内容
+   */
+  copyLetterContent:function(e){
+    var that = this;
+    //当前索引
+    var currentidx = e.currentTarget.dataset.idx;
+    console.log(currentidx); 
+
+    wx.setClipboardData({
+      //准备复制的数据内容
+      data: that.data.lettersList[currentidx].content,
+      success: function (res) {
+        wx.showToast({
+          title: '复制成功',
+        });
+      }
+    });
+  },
+
+  /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {

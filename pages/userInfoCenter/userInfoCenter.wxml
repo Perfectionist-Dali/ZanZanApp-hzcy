@@ -20,8 +20,14 @@
               </block>
             </view>
             <view class="city-area">{{userInfo.city}} {{userInfo.county}}</view>
-            <view class="user-zzcode-text">赞赞号：{{userInfo.zanCode}}</view>
-            <view class="user-zzcode-text">微信号：{{userInfo.wechatCode}}</view>
+            <view class="user-zzcode-text" bindtap="onCopyZanCode">
+              赞赞号：{{userInfo.zanCode}}
+              <image wx:if="{{userInfo.zanCode != ''}}" class="copy_text" src="{{imageHost}}/images/icons/copy_32px.png"/>
+            </view>
+            <view class="user-wechetcode-text" bindtap="onCopyWechatCode">
+              微信号：{{userInfo.wechatCode}}
+              <image wx:if="{{userInfo.wechatCode != ''}}" class="copy_text" src="{{imageHost}}/images/icons/copy_32px.png"/>
+            </view>
           </view>
           <view style="width:38%;height:120px;float: right;text-align:center;">
             <image src="{{userImageUrl}}" bindtap="previewImage" id="{{userImageUrl}}" data-urls="{{fileList}}" class="user-avatar"></image>

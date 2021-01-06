@@ -26,12 +26,12 @@ Page({
   onLoad: function() {
     console.log('index Launch');
     var that = this;
-    wx.removeStorageSync('LoginSessionKey');
-    wx.clearStorageSync();
-    console.log(wx.getStorageSync('LoginSessionKey'));
-    if(null == wx.getStorageSync('LoginSessionKey') || "" == wx.getStorageSync('LoginSessionKey')){
-      that.wxlogin();
-    }
+    // wx.removeStorageSync('LoginSessionKey');
+    // wx.clearStorageSync();
+    // console.log(wx.getStorageSync('LoginSessionKey'));
+    // if(typeof wx.getStorageSync('LoginSessionKey') == "undefined" || null == wx.getStorageSync('LoginSessionKey') || "" == wx.getStorageSync('LoginSessionKey')){
+    //   that.wxlogin();
+    // }
     // 查看是否授权
     // wx.getSetting({
     //     success: function(res) {
@@ -318,10 +318,12 @@ Page({
    */
   onReady: function () {
     var that = this;
-    // console.log(that.data.loginSessionId);
-    // if(null == that.data.loginSessionId || "" == that.data.loginSessionId){
-    //   that.wxlogin();
-    // }
+    //wx.removeStorageSync('LoginSessionKey');
+    //wx.clearStorageSync();
+    console.log(wx.getStorageSync('LoginSessionKey'));
+    if(typeof wx.getStorageSync('LoginSessionKey') == "undefined" || '' == wx.getStorageSync('LoginSessionKey') || null == wx.getStorageSync('LoginSessionKey')){
+      that.wxlogin();
+    }
   },
 
   /**

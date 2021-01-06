@@ -30,7 +30,7 @@
                 <view class="user_name">{{nickname}}</view>
                 <view class="last-word">
                   <view class="letter-content">
-                    <text>{{item.content}}</text>
+                    <text selectable="true" data-idx="{{index}}" bindlongpress="copyLetterContent">{{item.content}}</text>
                   </view>
                 </view>
               </view>
@@ -49,7 +49,7 @@
                 <view class="user_name_logon_user">{{logonUserNickname}}</view>
                 <view class="last-word-logon-user">
                   <view class="letter_content_logon_user">
-                    <text>{{item.content}}</text>
+                    <text selectable="true" data-idx="{{index}}" bindlongpress="copyLetterContent">{{item.content}}</text>
                   </view>
                 </view>
               </view>

@@ -22,6 +22,7 @@ Page({
     logonUserId:"",
     nickname:"",//昵称
     wechatCode:"",//微信号
+    zanCode:"",//赞赞号
     columns: [
       {
         values: Object.keys(citys),
@@ -103,6 +104,12 @@ Page({
               self.data.prefecture.cityCode = infoData.data.resData.cityCode;
               self.data.prefecture.county = infoData.data.resData.county;
               self.data.prefecture.countyCode = infoData.data.resData.countyCode;
+              self.data.gender = infoData.data.resData.gender;
+              self.data.wechatCode = infoData.data.resData.wechatCode;
+              self.data.zanCode = infoData.data.resData.zanCode;
+              self.data.birthday = infoData.data.resData.birthday;
+              self.data.signature = infoData.data.resData.signature;
+
               if(null != self.data.prefecture.province && "" != self.data.prefecture.province){
                 self.setData({
                   showChooseCity:false
@@ -135,6 +142,7 @@ Page({
                 gender:infoData.data.resData.gender,
                 nickname:infoData.data.resData.nickName,
                 wechatCode:infoData.data.resData.wechatCode,
+                zanCode:infoData.data.resData.zanCode,
                 prefecture:self.data.prefecture,
                 birthday:infoData.data.resData.birthday,
                 signature:infoData.data.resData.signature
@@ -205,6 +213,22 @@ Page({
       });
       return false;
     }
+    console.log("====that.data.prefecture====");
+    console.log(that.data.prefecture);
+    console.log(that.data.birthday);
+    if(typeof that.data.birthday == "undefined"){
+      that.data.birthday="";
+    }
+    if(typeof that.data.prefecture.provinceCode == "undefined"){
+      that.data.prefecture.provinceCode="";
+    }
+    if(typeof that.data.prefecture.cityCode == "undefined"){
+      that.data.prefecture.cityCode="";
+    }
+    if(typeof that.data.prefecture.countyCode == "undefined"){
+      that.data.prefecture.countyCode="";
+    }
+
     if(null != that.data.updateHeadImageUrl && "" != that.data.updateHeadImageUrl){
       wx.uploadFile({
         url: app.server.hostUrl + '/userInfo/submitUpdateMyselfInfo',
@@ -221,6 +245,7 @@ Page({
           'gender': that.data.gender,
           'nickname':that.data.nickname,
           'wechatCode':that.data.wechatCode,
+          'zanCode':that.data.zanCode,
           'provinceCode':that.data.prefecture.provinceCode,
           'province':that.data.prefecture.province,
           'cityCode':that.data.prefecture.cityCode,
@@ -734,7 +759,8 @@ Page({
               self.data.prefecture.county=resSessionData.data.resData.region,
               self.data.prefecture.countyCode=resSessionData.data.resData.regionCode
               self.setData({
-                prefecture:self.data.prefecture
+                prefecture:self.data.prefecture,
+                showChooseCity:false
               })
             }
           },
@@ -757,6 +783,34 @@ Page({
         })
       }
     })
+  },
+
+  //点击一键复制
+  onCopyZanCode: function (e) {
+    var that = this;
+    wx.setClipboardData({
+      //准备复制的数据内容
+      data: that.data.zanCode,
+      success: function (res) {
+        wx.showToast({
+          title: '已复制赞赞号',
+        });
+      }
+    });
+  },
+
+  //点击一键复制
+  onCopyWechatCode: function (e) {
+    var that = this;
+    wx.setClipboardData({
+      //准备复制的数据内容
+      data: that.data.wechatCode,
+      success: function (res) {
+        wx.showToast({
+          title: '已复制微信号',
+        });
+      }
+    });
   },
 
   /**

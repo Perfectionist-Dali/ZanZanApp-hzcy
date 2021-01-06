@@ -69,9 +69,19 @@
       <view class='line-text'></view>
 
       <view class="myself-info-view">
+        <view class="myself-info-label">赞赞号</view>
+        <view class="myself-info-text" bindtap="onCopyZanCode">
+          {{zanCode}}
+          <image wx:if="{{zanCode != ''}}" class="copy_text" src="{{imageHost}}/images/icons/copy_32px.png"/>
+        </view>
+      </view>
+      <view class='line-text'></view>
+
+      <view class="myself-info-view">
         <view class="myself-info-label">微信号</view>
-        <view class="myself-info-text" wx:if="{{showInfo}}">
+        <view class="myself-info-text" bindtap="onCopyWechatCode" wx:if="{{showInfo}}">
           {{wechatCode}}
+          <image wx:if="{{wechatCode != ''}}" class="copy_text" src="{{imageHost}}/images/icons/copy_32px.png"/>
         </view>
         <view class="myself-info-text view-width" wx:if="{{!showInfo}}">
           <view>

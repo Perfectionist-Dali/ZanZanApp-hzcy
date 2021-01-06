@@ -89,6 +89,7 @@ Page({
     that.setData({
       logonUserId:logonUserId
     })
+    var sessionId = wx.getStorageSync('LoginSessionKey');
     try {
       var self = this;
       let dynamicListParams = [];
@@ -107,7 +108,7 @@ Page({
           'content-type': 'application/json'
         },
         data: {
-          sessionId: wx.getStorageSync('LoginSessionKey'),
+          sessionId: sessionId,
           dynamicId: options.dynamicId
         },
         success: function (infoData) {
@@ -133,6 +134,7 @@ Page({
             console.log(infoData.data.messageInfo);
             if(infoData.data.status == "-2"){
               wx.removeStorageSync('LoginSessionKey');
+              console.log("4444444");
               wx.reLaunch({
                 url: "../index/index"
               });
@@ -150,7 +152,7 @@ Page({
             });
           };
           //加载评论
-          self.loadDynamicCommentList(options.dynamicId,'');
+          self.loadDynamicCommentList(options.dynamicId,'',sessionId);
         },
         fail: function (failRes) {
           console.log("获取动态详情失败：");
@@ -174,8 +176,10 @@ Page({
   /**
    * 加载评论列表
    */
-  loadDynamicCommentList: function (dynamicId,lastCommentTime) {
+  loadDynamicCommentList: function (dynamicId,lastCommentTime,sessionId) {
     var self = this;
+    console.log("sessionId====");
+    console.log(sessionId);
     wx.request({
       url: app.server.hostUrl + '/dynamic/loadDynamicCommentList',
       method: 'POST',
@@ -183,7 +187,7 @@ Page({
         'content-type': 'application/json'
       },
       data: {
-        sessionId: wx.getStorageSync('LoginSessionKey'),
+        sessionId: sessionId,
         dynamicId: dynamicId,
         lastCommentTime:lastCommentTime
       },
@@ -192,6 +196,7 @@ Page({
         console.log("加载评论数据：");
         console.log(infoData);
         if(infoData.data.status == "1" && infoData.data.message == "success"){
+          console.log("1111111111111");
           if(null != infoData.data.resData && infoData.data.resData.length > 0){
             if(null == self.data.dynamicCommentList || self.data.dynamicCommentList.length == 0 ){
               self.setData({
@@ -206,12 +211,13 @@ Page({
               })
             }
           }
-        }else{
+        }else{console.log("322222222");
           console.log(infoData.data.messageInfo);
           self.setData({
             dataResWarning:infoData.data.messageInfo
           });
           if(infoData.data.status == "-2"){
+            console.log("33333333");
             wx.removeStorageSync('LoginSessionKey');
             wx.reLaunch({
               url: "../index/index"
@@ -251,7 +257,8 @@ Page({
       lastCommentTime=self.data.dynamicCommentList.slice(-1)[0].commentTime;
     }
     console.log(lastCommentTime);
-    self.loadDynamicCommentList(self.data.dynamicId,lastCommentTime);
+    var sessionId = wx.getStorageSync('LoginSessionKey');
+    self.loadDynamicCommentList(self.data.dynamicId,lastCommentTime,sessionId);
   },
 
   /**
@@ -311,6 +318,7 @@ Page({
                   showCancel: false,
                   success:function(res) {
                     if(res.confirm) {
+                      console.log("55555");
                       wx.reLaunch({
                         url: "/pages/index/index"
                       });
@@ -362,7 +370,8 @@ Page({
       console.log(url);
       that.shareDynamic(dynamicId,dynamicuserid,dynamicIndex);
       return {
-        title:wx.getStorageSync('logonUserNickname')+"分享了『"+username+"』的动态：",
+        //title:wx.getStorageSync('logonUserNickname')+"分享了『"+username+"』的动态：",
+        title:"『"+username+"』的动态：",
         path:`/pages/zanzan/zanzan?url=${url}`,
         imageUrl:shareImage,
         success: function(res){
@@ -476,6 +485,7 @@ Page({
               showCancel: false,
               success:function(res) {
                 if(res.confirm) {
+                  console.log("666666");
                   wx.reLaunch({
                     url: "/pages/index/index"
                   });
@@ -702,6 +712,7 @@ Page({
               showCancel: false,
               success:function(res) {
                 if(res.confirm) {
+                  console.log("7777777");
                   wx.reLaunch({
                     url: "/pages/index/index"
                   });
@@ -791,6 +802,7 @@ Page({
               showCancel: false,
               success:function(res) {
                 if(res.confirm) {
+                  console.log("78888888");
                   wx.reLaunch({
                     url: "/pages/index/index"
                   });
@@ -865,6 +877,7 @@ Page({
               showCancel: false,
               success:function(res) {
                 if(res.confirm) {
+                  console.log("9999999");
                   wx.reLaunch({
                     url: "/pages/index/index"
                   });
@@ -989,6 +1002,7 @@ Page({
                   showCancel: false,
                   success:function(res) {
                     if(res.confirm) {
+                      console.log("12121212121212");
                       wx.reLaunch({
                         url: "/pages/index/index"
                       });
