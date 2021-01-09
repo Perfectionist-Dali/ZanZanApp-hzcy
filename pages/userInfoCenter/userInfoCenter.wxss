@@ -182,6 +182,6 @@
 .copy_text{
   position: relative;
   top: 4px;
-  width: 17px;
-  height: 16px;
+  width: 16px;
+  height: 15px;
 }

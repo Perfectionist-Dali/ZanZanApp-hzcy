@@ -687,8 +687,6 @@ Page({
             })
           }
         });
-
-        
       })
       .catch(() => {
         // on cancel
@@ -832,7 +830,7 @@ Page({
                 duration: 2000
               });
               wx.redirectTo({
-                url: "../index/index"
+                url: "../index/index?flag=logout"
               })
 
             }else{

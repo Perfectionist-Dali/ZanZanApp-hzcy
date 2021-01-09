@@ -134,7 +134,6 @@ Page({
             console.log(infoData.data.messageInfo);
             if(infoData.data.status == "-2"){
               wx.removeStorageSync('LoginSessionKey');
-              console.log("4444444");
               wx.reLaunch({
                 url: "../index/index"
               });
@@ -211,13 +210,12 @@ Page({
               })
             }
           }
-        }else{console.log("322222222");
+        }else{
           console.log(infoData.data.messageInfo);
           self.setData({
             dataResWarning:infoData.data.messageInfo
           });
           if(infoData.data.status == "-2"){
-            console.log("33333333");
             wx.removeStorageSync('LoginSessionKey');
             wx.reLaunch({
               url: "../index/index"
@@ -318,7 +316,6 @@ Page({
                   showCancel: false,
                   success:function(res) {
                     if(res.confirm) {
-                      console.log("55555");
                       wx.reLaunch({
                         url: "/pages/index/index"
                       });
@@ -485,7 +482,6 @@ Page({
               showCancel: false,
               success:function(res) {
                 if(res.confirm) {
-                  console.log("666666");
                   wx.reLaunch({
                     url: "/pages/index/index"
                   });
@@ -712,7 +708,6 @@ Page({
               showCancel: false,
               success:function(res) {
                 if(res.confirm) {
-                  console.log("7777777");
                   wx.reLaunch({
                     url: "/pages/index/index"
                   });
@@ -802,7 +797,6 @@ Page({
               showCancel: false,
               success:function(res) {
                 if(res.confirm) {
-                  console.log("78888888");
                   wx.reLaunch({
                     url: "/pages/index/index"
                   });
@@ -877,7 +871,6 @@ Page({
               showCancel: false,
               success:function(res) {
                 if(res.confirm) {
-                  console.log("9999999");
                   wx.reLaunch({
                     url: "/pages/index/index"
                   });
@@ -1002,7 +995,6 @@ Page({
                   showCancel: false,
                   success:function(res) {
                     if(res.confirm) {
-                      console.log("12121212121212");
                       wx.reLaunch({
                         url: "/pages/index/index"
                       });

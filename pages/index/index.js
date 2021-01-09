@@ -23,9 +23,11 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function() {
+  onLoad: function(options) {
     console.log('index Launch');
     var that = this;
+    that.wxlogin();
+    //this.onLoad();
     // wx.removeStorageSync('LoginSessionKey');
     // wx.clearStorageSync();
     // console.log(wx.getStorageSync('LoginSessionKey'));
@@ -113,10 +115,24 @@ Page({
                   });
                 }
               }else if(resultUserInfo.data.status < 0 && resultUserInfo.data.message == "failed"){
-                if(null != that.data.loginSessionId && "" != that.data.loginSessionId){
-                  wx.removeStorageSync('LoginSessionKey');
-                  that.wxlogin();
-                }
+                wx.showModal({
+                  title: '提示',
+                  content: '页面超时，请重新点击授权登录！',
+                  showCancel: false,//是否显示取消按钮
+                  confirmText:"确定",//默认是“确定”
+                  success: function (res) {
+                     if (res.cancel) {
+                        
+                     } else {
+                      if(null != that.data.loginSessionId && "" != that.data.loginSessionId){
+                        wx.removeStorageSync('LoginSessionKey');
+                        that.wxlogin();
+                      }
+                     }
+                  },
+                  fail: function (res) { },//接口调用失败的回调函数
+                  complete: function (res) { },//接口调用结束的回调函数（调用成功、失败都会执行）
+               })
               }else{
                 wx.showModal({
                   title: '提示',
@@ -320,10 +336,10 @@ Page({
     var that = this;
     //wx.removeStorageSync('LoginSessionKey');
     //wx.clearStorageSync();
-    console.log(wx.getStorageSync('LoginSessionKey'));
-    if(typeof wx.getStorageSync('LoginSessionKey') == "undefined" || '' == wx.getStorageSync('LoginSessionKey') || null == wx.getStorageSync('LoginSessionKey')){
-      that.wxlogin();
-    }
+    // console.log(wx.getStorageSync('LoginSessionKey'));
+    // if(typeof wx.getStorageSync('LoginSessionKey') == "undefined" || '' == wx.getStorageSync('LoginSessionKey') || null == wx.getStorageSync('LoginSessionKey')){
+    //   that.wxlogin();
+    // }
   },
 
   /**

@@ -10,15 +10,10 @@ App({
   },
 
   server: {
-    //local
-    hostUrl:"http://192.168.1.6:8888",
-    imageHost:"http://192.168.1.6:8080",
-    WS_URL:"ws://192.168.1.6:8888/websocket/"
 
-    //pro
-    // hostUrl:"http://123.57.212.164:8088/zanzan",
-    // imageHost:"http://123.57.212.164:8081/",
-    // WS_URL:"ws://123.57.212.164:8088/zanzan/websocket/"
+    hostUrl:"https://server.zanzan100.com/zanzan",
+    imageHost:"https://server.zanzan100.com",
+    WS_URL:"wss://server.zanzan100.com/zanzan/websocket/"
   },
 
   onLaunch: function () {
